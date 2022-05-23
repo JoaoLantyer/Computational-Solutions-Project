@@ -147,8 +147,8 @@ public class Filme {
 
         System.out.println("\nVOCÊ SELECIONOU: [5] CONSULTAR FILME\n");
 
-        for(int i = 0 ; i < listaFilme.size(); i++){
-            listaFilme.get(i).imprimirFilme();
+        for (Filme umFilme : listaFilme) {
+            umFilme.imprimirFilme();
         }
         System.out.println("-----------------------------------------------------------");
         System.out.println("|                    FIM DA CONSULTA                      |");
@@ -156,85 +156,3 @@ public class Filme {
     }
 
 }
-
-    /*private int idFilme = 0;
-
-    Scanner scan = new Scanner(System.in);
-
-    //DECLARANDO OS ARRAYLISTS
-    static ArrayList<Integer> idFilmeLista = new ArrayList<>();
-    static ArrayList<String> tituloLista = new ArrayList<>();
-    static ArrayList<String>  diretorLista = new ArrayList<>();
-    static ArrayList<Integer>  duracaoLista = new ArrayList<>();
-    static ArrayList<String>  classificacaoLista = new ArrayList<>();
-    static ArrayList<String>  generoLista = new ArrayList<>();
-    static ArrayList<Integer>  quantidadeLista = new ArrayList<>();
-    static ArrayList<Float>  valorLista = new ArrayList<>();
-
-    public void cadastrarFilme(){
-
-        System.out.println("\nVOCÊ SELECIONOU: [4] CADASTRAR FILME\n");
-
-        idFilme++;
-        idFilmeLista.add(idFilme);
-
-        System.out.print("INFORME O TÍTULO: ");
-        String titulo = scan.nextLine();
-        tituloLista.add(titulo);
-
-        System.out.print("INFORME O DIRETOR: ");
-        String diretor = scan.nextLine();
-        diretorLista.add(diretor);
-
-        System.out.print("INFORME O GÊNERO: ");
-        String genero = scan.nextLine();
-        generoLista.add(genero);
-
-        System.out.print("INFORME A CLASSIFICAÇÃO INDICATIVA: ");
-        String classificacao = scan.nextLine();
-        classificacaoLista.add(classificacao);
-
-        System.out.print("INFORME A DURAÇÃO (EM MINUTOS): ");
-        int duracao = scan.nextInt();
-        duracaoLista.add(duracao);
-
-        System.out.print("INFORME A QUANTIDADE DE CÓPIAS DISPONÍVEIS: ");
-        int quantidade = scan.nextInt();
-        quantidadeLista.add(quantidade);
-
-        System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
-        float valor = scan.nextFloat();
-        valorLista.add(valor);
-
-        scan.nextLine();
-
-
-
-        System.out.println("\nCADASTRO CONCLUIDO!");
-
-    }
-
-    public void consultarFilmes(){
-
-        System.out.println("\nVOCÊ SELECIONOU: [5] CONSULTAR FILME\n");
-
-        System.out.println("==================== DADOS DOS FILMES ===================== \n");
-
-        for (int i = 0 ; i < tituloLista.size(); i++ ){
-            System.out.println("-----------------------------------------------------------");
-            System.out.println("| ID DO FILME: " + idFilmeLista.get(i));
-            System.out.println("| TÍTULO DO FILME: " + tituloLista.get(i));
-            System.out.println("| DIRETOR: " + diretorLista.get(i));
-            System.out.println("| GÊNERO: " + generoLista.get(i));
-            System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + classificacaoLista.get(i));
-            System.out.println("| DURAÇÃO: " + duracaoLista.get(i) + " MINUTOS");
-            System.out.println("| UNIDADES DISPONÍVEIS: " + quantidadeLista.get(i));
-            System.out.println("| VALOR POR UNIDADE: R$ " + valorLista.get(i));
-            System.out.println("-----------------------------------------------------------\n");
-        }
-            System.out.println("-----------------------------------------------------------");
-            System.out.println("|                    FIM DA CONSULTA                      |");
-            System.out.println("-----------------------------------------------------------\n");
-
-    }
-}*/
