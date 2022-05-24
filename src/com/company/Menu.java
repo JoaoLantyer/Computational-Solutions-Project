@@ -165,6 +165,8 @@ public class Menu {
             }while (opcao.equalsIgnoreCase("SIM"));
 
             if (opcao.equalsIgnoreCase("NAO")) {
+
+                System.out.println("SAINDO...");
         } else {
             System.out.println("OPÇÃO INVÁLIDA, SAINDO... ");
         }
@@ -184,7 +186,7 @@ public class Menu {
             System.out.println("-----------------------------------------------------------\n");
         }
     }
-    
+
     public void sair(){
         System.out.println("\nVOCÊ SELECIONOU: [7] SAIR\n");
     }
