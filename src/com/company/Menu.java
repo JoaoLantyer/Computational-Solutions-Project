@@ -1,4 +1,5 @@
 package com.company;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -102,6 +103,7 @@ public class Menu {
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
+        //Declarando as variáveis
         int id = 0;
         String respCliente, respFilme, opcao;
         float valorTotal = 0;
@@ -109,11 +111,13 @@ public class Menu {
 
         System.out.println("\nVOCÊ SELECIONOU: [1] REALIZAR ALUGUEL\n");
 
+        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (o id recebe seu valor por meio do tamanho do ArrayList idAluguelLista)
         id++;
         idAluguelLista.add(id);
         id = idAluguelLista.size();
         System.out.println("ID DO ALUGUEL: " + id);
 
+        //Atribuíndo o cpf do Cliente que irá fazer aluguel numa variável, para que se busque na lista clienteLista um Cliente com o mesmo cpf, e se achar, irá imprimir o resto dos seus dados
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
         respCliente = scan.nextLine();
         for (Cliente umCliente : clienteLista) {
@@ -129,8 +133,11 @@ public class Menu {
 
         }
 
+        //Criando uma estrutura de repetição "do while" para repetir esta porção do código, toda vez que o usuário escolher que quer fazer o aluguel de um filme adicional
         do {
 
+            /*Atribuindo o título do Filme que será alugado numa variável, para que busque na lista filmeLista um Filme com o mesmo título,
+            e se achar, juntamente com o fato de ter mais de 0 unidades, irá imprimir o resto dos dados do mesmo */
             System.out.print("INFORME A SEGUIR O TÍTULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
             respFilme = scan.nextLine();
             for (Filme umFilme : filmeLista) {
@@ -146,6 +153,9 @@ public class Menu {
                         umFilme.setQuantidade(umFilme.getQuantidade() + menos);
                         System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
                         System.out.println("-----------------------------------------------------------\n");
+
+                        /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
+                        ArrayList AluguelFilmeLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
                         AluguelFilmeLista.add(umFilme.getTitulo());
 
                         for (Cliente umCliente : clienteLista) {
@@ -153,7 +163,7 @@ public class Menu {
                                 AluguelClienteLista.add(umCliente.getNome());
                             }
                         }
-
+                        //Atribuindo e somando o valor do Filme alugado ao valorTotal, toda vez que essa operação é repetida, para recebermos o valor total da transação
                         valorTotal += umFilme.getValor();
                     }
                 }
@@ -185,11 +195,12 @@ public class Menu {
             System.out.println("-----------------------------------------------------------\n");
         }
     }
-
+    //Criando um método para imprimir uma mensagem de saída, quando o usuário escolher 7
     public void sair(){
         System.out.println("\nVOCÊ SELECIONOU: [7] SAIR\n");
     }
 
+    //Criando um método que imprima uma mensagem "default", ou seja, irá aparecer quando o usuário digitar qualquer coisa que não seja de 1 a 7
     public void mensagemDefault(){
         System.out.println("\n[ALERTA] VOCÊ DEVE SELECIONAR UM NÚMERO ENTRE 1 E 7 PARA UTILIZAR O MENU!\n");
     }
