@@ -142,14 +142,9 @@ public class Filme {
     //Criando um método que imprime todos os atributos do Filme
     public void imprimirFilme(){
         System.out.println("-----------------------------------------------------------");
-        System.out.println("| ID DO FILME: " + id);
-        System.out.println("| TÍTULO DO FILME: " + titulo);
-        System.out.println("| DIRETOR: " + diretor);
-        System.out.println("| GÊNERO: " + genero);
-        System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + classificacao);
-        System.out.println("| DURAÇÃO: " + duracao + " MINUTOS");
-        System.out.println("| UNIDADES DISPONÍVEIS: " + quantidade);
-        System.out.println("| VALOR POR UNIDADE: R$ " + valor);
+				System.out.println("|      TITULO       |       DIRETOR       |  C. INDICATIVA |");
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("| " + titulo + " | " + diretor + "|" + classificacao + " | ");      
         System.out.println("-----------------------------------------------------------\n");
     }
 
