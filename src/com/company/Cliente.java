@@ -110,18 +110,4 @@ public class Cliente {
         System.out.println("|                    FIM DA CONSULTA                      |");
         System.out.println("-----------------------------------------------------------\n");
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

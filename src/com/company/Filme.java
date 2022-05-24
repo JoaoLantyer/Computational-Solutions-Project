@@ -10,7 +10,6 @@ public class Filme {
     private String titulo, diretor, classificacao, genero;
     private float valor;
 
-    Scanner scan = new Scanner(System.in);
     static ArrayList<Integer> idFilmeLista = new ArrayList<>();
 
     public Filme(int id, String titulo, String diretor, String genero, String classificacao, int duracao, int quantidade, float valor) {
@@ -155,5 +154,4 @@ public class Filme {
         System.out.println("|                    FIM DA CONSULTA                      |");
         System.out.println("-----------------------------------------------------------\n");
     }
-
 }

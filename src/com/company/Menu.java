@@ -27,8 +27,8 @@ public class Menu {
         clienteLista.add(new Cliente("João Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
         clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
         clienteLista.add(new Cliente("João Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
-        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "renanabreu@email.com", "33333-333"));
-        clienteLista.add(new Cliente("Leoni Mascarenhas", "444444444444", "444444444", "renanabreu@email.com", "44444-444"));
+        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
+        clienteLista.add(new Cliente("Leoni Mascarenhas", "444444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
         filmeLista.add(new Filme(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Ação", "12 anos", 152, 5, 7.90f));
         filmeLista.add(new Filme(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
         filmeLista.add(new Filme(3, "O Poderoso Chefão", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
@@ -109,64 +109,63 @@ public class Menu {
 
         System.out.println("\nVOCÊ SELECIONOU: [1] REALIZAR ALUGUEL\n");
 
-            id++;
-            idAluguelLista.add(id);
-            id = idAluguelLista.size();
-            System.out.println("ID DO ALUGUEL: " + id);
+        id++;
+        idAluguelLista.add(id);
+        id = idAluguelLista.size();
+        System.out.println("ID DO ALUGUEL: " + id);
 
-            System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
-            respCliente = scan.nextLine();
-            for (Cliente umCliente : clienteLista) {
-                if (respCliente.equals(umCliente.getCpf())) {
-                    System.out.println("-----------------------------------------------------------");
-                    System.out.println("| NOME: " + umCliente.getNome());
-                    System.out.println("| TELEFONE: " + umCliente.getTelefone());
-                    System.out.println("| E-MAIL: " + umCliente.getEmail());
-                    System.out.println("| CEP: " + umCliente.getCep());
-                    System.out.println("-----------------------------------------------------------\n");
-                }
-
-
+        System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
+        respCliente = scan.nextLine();
+        for (Cliente umCliente : clienteLista) {
+            if (respCliente.equals(umCliente.getCpf())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.println("| NOME: " + umCliente.getNome());
+                System.out.println("| TELEFONE: " + umCliente.getTelefone());
+                System.out.println("| E-MAIL: " + umCliente.getEmail());
+                System.out.println("| CEP: " + umCliente.getCep());
+                System.out.println("-----------------------------------------------------------\n");
             }
 
-            do {
 
-                System.out.print("INFORME A SEGUIR O TÍTULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
-                respFilme = scan.nextLine();
-                for (Filme umFilme : filmeLista) {
-                    if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
-                        if(umFilme.getQuantidade() > 0) {
-                            System.out.println("-----------------------------------------------------------");
-                            System.out.println("| ID DO FILME: " + umFilme.getId());
-                            System.out.println("| DIRETOR: " + umFilme.getDiretor());
-                            System.out.println("| GÊNERO: " + umFilme.getGenero());
-                            System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + umFilme.getClassificacao());
-                            System.out.println("| DURAÇÃO: " + umFilme.getDuracao() + " MINUTOS");
-                            System.out.println("| UNIDADES DISPONÍVEIS APÓS O ALUGUEL: " + (umFilme.getQuantidade() + menos));
-                            umFilme.setQuantidade(umFilme.getQuantidade() + menos);
-                            System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
-                            System.out.println("-----------------------------------------------------------\n");
-                            AluguelFilmeLista.add(umFilme.getTitulo());
+        }
 
-                            for (Cliente umCliente : clienteLista) {
-                                if (respCliente.equals(umCliente.getCpf())) {
-                                    AluguelClienteLista.add(umCliente.getNome());
-                                }
+        do {
+
+            System.out.print("INFORME A SEGUIR O TÍTULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
+            respFilme = scan.nextLine();
+            for (Filme umFilme : filmeLista) {
+                if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
+                    if(umFilme.getQuantidade() > 0) {
+                        System.out.println("-----------------------------------------------------------");
+                        System.out.println("| ID DO FILME: " + umFilme.getId());
+                        System.out.println("| DIRETOR: " + umFilme.getDiretor());
+                        System.out.println("| GÊNERO: " + umFilme.getGenero());
+                        System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + umFilme.getClassificacao());
+                        System.out.println("| DURAÇÃO: " + umFilme.getDuracao() + " MINUTOS");
+                        System.out.println("| UNIDADES DISPONÍVEIS APÓS O ALUGUEL: " + (umFilme.getQuantidade() + menos));
+                        umFilme.setQuantidade(umFilme.getQuantidade() + menos);
+                        System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
+                        System.out.println("-----------------------------------------------------------\n");
+                        AluguelFilmeLista.add(umFilme.getTitulo());
+
+                        for (Cliente umCliente : clienteLista) {
+                            if (respCliente.equals(umCliente.getCpf())) {
+                                AluguelClienteLista.add(umCliente.getNome());
                             }
-
-                            valorTotal += umFilme.getValor();
                         }
+
+                        valorTotal += umFilme.getValor();
                     }
                 }
+            }
 
-                System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
-                opcao = scan.nextLine();
+            System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
+            opcao = scan.nextLine();
 
-            }while (opcao.equalsIgnoreCase("SIM"));
+        }while (opcao.equalsIgnoreCase("SIM"));
 
-            if (opcao.equalsIgnoreCase("NAO")) {
-
-                System.out.println("SAINDO...");
+        if (opcao.equalsIgnoreCase("NAO")) {
+            System.out.println("SAINDO...");
         } else {
             System.out.println("OPÇÃO INVÁLIDA, SAINDO... ");
         }
