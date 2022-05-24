@@ -98,8 +98,7 @@ public class Cliente {
 
     //Criando um método que imprime todos os atributos do Cliente
     public void imprimirCliente(){
-        System.out.println("-----------------------------------------------------------");
-				System.out.println("|      NOME       |       CPF        |       EMAIL      |");
+       
 				System.out.println("| " + nome + " | " + cpf + "|" + email + " | ");
         System.out.println("-----------------------------------------------------------\n");
     }
@@ -110,6 +109,8 @@ public class Cliente {
         System.out.println("\nVOCÊ SELECIONOU: [3] CONSULTAR CLIENTE\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaCliente, e imprima o seu resultado por meio do método imprimirCliente(), para cada umCliente.
+			 	System.out.println("-----------------------------------------------------------");
+				System.out.println("|      NOME       |       CPF        |       EMAIL      |");
         for (Cliente umCliente : listaCliente) {
             umCliente.imprimirCliente();
         }
