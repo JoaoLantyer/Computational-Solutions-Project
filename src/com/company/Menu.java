@@ -1,50 +1,87 @@
 package com.company;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Menu {
 
-    //Declarando ArrayLists
+    //Declarando os ArrayLists que irão receber os Objetos da classe Cliente e Filme respectivamente
     ArrayList<Cliente> clienteLista = new ArrayList<>();
     ArrayList<Filme> filmeLista = new ArrayList<>();
+
+    //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String
     ArrayList<Integer> idAluguelLista = new ArrayList<>();
     ArrayList<String> AluguelClienteLista = new ArrayList<>();
     ArrayList<String> AluguelFilmeLista = new ArrayList<>();
 
     public void executar(){
 
+        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
-        //Variáveis
-        int num;
+        //Declarando a variável para registrar a escolha do Menu
+        int escolha;
 
         System.out.println("\n---------------------INICIO DO PROGRAMA--------------------\n");
 
-        exibirMenu();
+        //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
+        clienteLista.add(new Cliente("João Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
+        clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
+        clienteLista.add(new Cliente("João Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
+        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "renanabreu@email.com", "33333-333"));
+        clienteLista.add(new Cliente("Leoni Mascarenhas", "444444444444", "444444444", "renanabreu@email.com", "44444-444"));
+        filmeLista.add(new Filme(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Ação", "12 anos", 152, 5, 7.90f));
+        filmeLista.add(new Filme(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
+        filmeLista.add(new Filme(3, "O Poderoso Chefão", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
 
+        //Adicionando 3 elementos no ArrayList idFilmeLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista
+        Filme.idFilmeLista.add(1);
+        Filme.idFilmeLista.add(2);
+        Filme.idFilmeLista.add(3);
+
+        //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 7(sair)
         do{
+            //Executando o método que irá imprimir o Menu
+            exibirMenu();
 
             System.out.println("==================== ESCOLHA SUA OPÇÃO ====================");
             System.out.print("\nDIGITE UM NÚMERO ENTRE 1 E 7 PARA UTILIZAR O MENU: ");
-            num = scan.nextInt();
 
-            switch (num) {
+            //Atribuindo o valor da variável "escolha" ao que for digitado no teclado do usuário
+            escolha = scan.nextInt();
+
+            //Criando uma estrutura de decisão "switch case" que terá a variável "num" como a variável de controle e selecionará uma das 8 opções dependendo do que o usuário digitou
+            switch (escolha) {
+                //Caso o usuário tenha digitado 1, será executado o método realizarAluguel()
                 case 1 -> realizarAluguel();
+
+                //Caso o usuário tenha digitado 2, será executado o método da classe cliente cadastrarCliente() e o retorno deste será adicionado ao ArrayList clienteLista
                 case 2 -> clienteLista.add(Cliente.cadastrarCliente());
+
+                //Caso o usuário tenha digitado 3, será executado o método da classe cliente consultarCliente() no ArrayList clienteLista
                 case 3 -> Cliente.consultarCliente(clienteLista);
+
+                //Caso o usuário tenha digitado 4, será executado o método da classe Filme cadastrarFilme() e o retorno deste será adicionado ao ArrayList filmeLista
                 case 4 -> filmeLista.add(Filme.cadastrarFilme());
+
+                //Caso o usuário tenha digitado 5, será executado o método da classe Filme consultarFilme() no ArrayList filmeLista
                 case 5 -> Filme.consultarFilme(filmeLista);
+
+                //Caso o usuário tenha digitado 6, será executado o método pendencias()
                 case 6 -> pendencias();
+
+                //Caso o usuário tenha digitado 7, será executado o método sair()
                 case 7 -> sair();
+
+                //Caso o usuário tenha digitado qualquer outra coisa, será executado o método mensagemDefault()
                 default -> mensagemDefault();
             }
 
-        }while(num != 7);
+        }while(escolha != 7);
 
         System.out.println("--------------------PROGRAMA FINALIZADO--------------------");
     }
 
+    //Criando um método para imprimir o Menu
     public void exibirMenu(){
 
         System.out.println("-----------------------------------------------------------");
@@ -59,17 +96,18 @@ public class Menu {
 
     }
 
+    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
     public void realizarAluguel() {
 
+        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
         int id = 0;
         String respCliente, respFilme, opcao;
         float valorTotal = 0;
+        int menos = -1;
 
         System.out.println("\nVOCÊ SELECIONOU: [1] REALIZAR ALUGUEL\n");
-
-
 
             id++;
             idAluguelLista.add(id);
@@ -86,55 +124,67 @@ public class Menu {
                     System.out.println("| E-MAIL: " + umCliente.getEmail());
                     System.out.println("| CEP: " + umCliente.getCep());
                     System.out.println("-----------------------------------------------------------\n");
-                    AluguelClienteLista.add(umCliente.getNome());
                 }
+
+
             }
 
             do {
 
-            System.out.print("INFORME A SEGUIR O TÍTULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
-            respFilme = scan.nextLine();
-            for (Filme umFilme : filmeLista) {
-                if (respFilme.equals(umFilme.getTitulo())) {
-                    System.out.println("-----------------------------------------------------------");
-                    System.out.println("| ID DO FILME: " + umFilme.getId());
-                    System.out.println("| DIRETOR: " + umFilme.getDiretor());
-                    System.out.println("| GÊNERO: " + umFilme.getGenero());
-                    System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + umFilme.getClassificacao());
-                    System.out.println("| DURAÇÃO: " + umFilme.getDuracao() + " MINUTOS");
-                    System.out.println("| UNIDADES DISPONÍVEIS: " + umFilme.getQuantidade());
-                    System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
-                    System.out.println("-----------------------------------------------------------\n");
-                    AluguelFilmeLista.add(umFilme.getTitulo());
-                    valorTotal += umFilme.getValor();
+                System.out.print("INFORME A SEGUIR O TÍTULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
+                respFilme = scan.nextLine();
+                for (Filme umFilme : filmeLista) {
+                    if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
+                        if(umFilme.getQuantidade() > 0) {
+                            System.out.println("-----------------------------------------------------------");
+                            System.out.println("| ID DO FILME: " + umFilme.getId());
+                            System.out.println("| DIRETOR: " + umFilme.getDiretor());
+                            System.out.println("| GÊNERO: " + umFilme.getGenero());
+                            System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + umFilme.getClassificacao());
+                            System.out.println("| DURAÇÃO: " + umFilme.getDuracao() + " MINUTOS");
+                            System.out.println("| UNIDADES DISPONÍVEIS APÓS O ALUGUEL: " + (umFilme.getQuantidade() + menos));
+                            umFilme.setQuantidade(umFilme.getQuantidade() + menos);
+                            System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
+                            System.out.println("-----------------------------------------------------------\n");
+                            AluguelFilmeLista.add(umFilme.getTitulo());
+
+                            for (Cliente umCliente : clienteLista) {
+                                if (respCliente.equals(umCliente.getCpf())) {
+                                    AluguelClienteLista.add(umCliente.getNome());
+                                }
+                            }
+
+                            valorTotal += umFilme.getValor();
+                        }
+                    }
                 }
-            }
 
-            System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' ou 'NAO': ");
-            opcao = scan.nextLine();
+                System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
+                opcao = scan.nextLine();
 
-            switch(opcao.toUpperCase(Locale.ROOT)) {
-                case "SIM":
-                case "NAO":
-                    break;
-                default:
-                    System.out.println("OPÇÃO INVÁLIDA, SAINDO... ");
-            }
+            }while (opcao.equalsIgnoreCase("SIM"));
 
-        } while (opcao.equalsIgnoreCase("SIM"));
+            if (opcao.equalsIgnoreCase("NAO")) {
+        } else {
+            System.out.println("OPÇÃO INVÁLIDA, SAINDO... ");
+        }
 
         System.out.println("VALOR TOTAL: " + valorTotal);
         System.out.println("--------------------MUITO OBRIGADO!--------------------");
 
     }
 
+    //Criando um método para checar quais objetos foram alugados, imprimindo o nome do cliente que fez o aluguel e o título do filme alugado
     public void pendencias() {
         System.out.println("\nVOCÊ SELECIONOU: [6] ALUGUEIS PENDENTES\n");
         for (int i = 0; i < AluguelClienteLista.size(); i++) {
-            System.out.println("CLIENTE: " + AluguelClienteLista.get(i) + "\n FILME PENDENTE: " + AluguelFilmeLista.get(i));
+            System.out.println("-----------------------------------------------------------");
+            System.out.println("|CLIENTE: " + AluguelClienteLista.get(i));
+            System.out.println("|FILME(S) PENDENTE(S): " + AluguelFilmeLista.get(i));
+            System.out.println("-----------------------------------------------------------\n");
         }
     }
-
+    
     public void sair(){
         System.out.println("\nVOCÊ SELECIONOU: [7] SAIR\n");
     }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Cliente {
 
+    //Declarando os atributos
     private String nome, cpf, telefone, email, cep;
 
     public Cliente(String nome, String cpf, String telefone, String email, String cep){

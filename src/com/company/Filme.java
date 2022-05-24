@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Filme {
 
+    //Declarando os atributos
     private int id, duracao, quantidade;
     private String titulo, diretor, classificacao, genero;
     private float valor;
@@ -93,7 +94,7 @@ public class Filme {
 
         Scanner scan = new Scanner(System.in);
 
-        int id = 0, duracao, quantidade;
+        int id = 3, duracao, quantidade;
         String titulo, diretor, classificacao, genero;
         float valor;
 
