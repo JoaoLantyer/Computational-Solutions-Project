@@ -137,6 +137,64 @@ public class Filme {
 
     }
 
+    public static void consultarFilme(ArrayList<Filme> listaFilme){
+
+        int escolhaConsultarFilme;
+        String escolhaSelecionarGenero, escolhaSelecionarClassificacao, escolhaTitulo;
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("|                 SUB-MENU CONSULTAR FILME                |");
+        System.out.println("|                                                         |");
+        System.out.println("|   [1] LISTAR TODOS OS FILMES                            |");
+        System.out.println("|   [2] LISTAR FILMES POR GENERO                          |");
+        System.out.println("|   [3] LISTAR FILMES POR CLASSIFICACAO INDICATIVA        |");
+        System.out.println("|   [4] BUSCAR UM FILME ESPECIFICO                        |");
+        System.out.println("|                                                         |");
+        System.out.println("-----------------------------------------------------------");
+
+        System.out.print("DIGITE UM NUMERO ENTRE 1 E 4 PARA UTILIZAR O MENU: ");
+        escolhaConsultarFilme = scan.nextInt();
+
+        scan.nextLine();
+
+        switch(escolhaConsultarFilme){
+            case 1: listarFilme(listaFilme);
+                break;
+            case 2: escolhaSelecionarGenero = selecionarGenero();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |  GENERO  |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                for (Filme umFilme : listaFilme) {
+                if (escolhaSelecionarGenero.equalsIgnoreCase(umFilme.getGenero())) {
+                    System.out.printf("|%-5s%-11s%-60s%-38s%-16s%-10s%-13s%-8s|\n", umFilme.getId(), umFilme.getGenero(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+            }}
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+            case 3: escolhaSelecionarClassificacao = selecionarClassificacao();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |  GENERO  | DURACAO | QUANTIDADE |  VALOR |");
+                for (Filme umFilme : listaFilme) {
+                    if (escolhaSelecionarClassificacao.equalsIgnoreCase(umFilme.getClassificacao())) {
+                        System.out.printf("|%-5s%-16s%-60s%-38s%-11s%-10s%-13s%-8s|\n",umFilme.getId(), umFilme.getClassificacao(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                    }}
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+            case 4: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
+                escolhaTitulo = scan.nextLine();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                for (Filme umFilme : listaFilme) {
+                    if (escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())) {
+                        System.out.printf("|%-5s%-60s%-38s%-11s%-16s%-10s%-13s%-8s|\n",umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                    }}
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 4 PARA UTILIZAR O SUB-MENU CONSULTAR FILME!\n");
+        }
+
+    }
+
     //Criando um método que imprime todos os atributos do Filme
     public void imprimirFilme(){
         				
@@ -144,7 +202,7 @@ public class Filme {
     }
 
     //Criando um método que recebe um ArrayList de um objeto Filme, neste caso listaFilme
-    public static void consultarFilme(ArrayList<Filme> listaFilme){
+    public static void listarFilme(ArrayList<Filme> listaFilme){
 
         System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR FILME\n");
 
@@ -169,12 +227,12 @@ public class Filme {
         System.out.println("-----------------------------------------------------------------------");
         System.out.println("|                         SELECIONE O GENERO:                         |");
         System.out.println("|                                                                     |");
-        System.out.println("[ 1 ] Acao                  [ 2 ] Animacao      [ 3 ] Aventura        |");
-        System.out.println("[ 4 ] Biografia             [ 5 ] Comedia       [ 6 ] Crime           |");
-        System.out.println("[ 7 ] Documentario          [ 7 ] Drama         [ 8 ] Fantasia        |");
-        System.out.println("[ 9 ] Ficcao Cientifica     [10 ] Faroeste      [11 ] Guerra          |");
-        System.out.println("[12 ] Musical               [13 ] Romance       [14 ] Suspense        |");
-        System.out.println("[15 ] Terror                [16 ] Outro                               |");
+        System.out.println("|   [ 1 ] Acao                  [ 2 ] Animacao      [ 3 ] Aventura    |");
+        System.out.println("|   [ 4 ] Biografia             [ 5 ] Comedia       [ 6 ] Crime       |");
+        System.out.println("|   [ 7 ] Documentario          [ 7 ] Drama         [ 8 ] Fantasia    |");
+        System.out.println("|   [ 9 ] Ficcao Cientifica     [10 ] Faroeste      [11 ] Guerra      |");
+        System.out.println("|   [12 ] Musical               [13 ] Romance       [14 ] Suspense    |");
+        System.out.println("|   [15 ] Terror                [16 ] Outro                           |");
         System.out.println("|                                                                     |");
         System.out.println("-----------------------------------------------------------------------");
         System.out.print("SUA ESCOLHA: ");
