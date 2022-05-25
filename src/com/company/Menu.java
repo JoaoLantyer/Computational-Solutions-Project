@@ -93,13 +93,16 @@ public class Menu {
     public void exibirMenu(){
 
         System.out.println("-----------------------------------------------------------");
-        System.out.println("| \t\t   [1] REALIZAR ALUGUEL                            |");
-        System.out.println("| \t\t   [2] CADASTRAR CLIENTE                           |");
-        System.out.println("| \t\t   [3] CONSULTAR CLIENTE                           |");
-        System.out.println("| \t\t   [4] CADASTRAR FILME                             |");
-        System.out.println("| \t\t   [5] CONSULTAR FILME                             |");
-        System.out.println("| \t\t   [6] ALUGUEIS PENDENTES                          |");
-        System.out.println("| \t\t   [7] SAIR                                        |");
+        System.out.println("|                     MENU PRINCIPAL                      |");
+        System.out.println("|                                                         |");
+        System.out.println("|                   [1] REALIZAR ALUGUEL                  |");
+        System.out.println("|                   [2] CADASTRAR CLIENTE                 |");
+        System.out.println("|                   [3] CONSULTAR CLIENTE                 |");
+        System.out.println("|                   [4] CADASTRAR FILME                   |");
+        System.out.println("|                   [5] CONSULTAR FILME                   |");
+        System.out.println("|                   [6] ALUGUEIS PENDENTES                |");
+        System.out.println("|                   [7] SAIR                              |");
+        System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------\n");
 
     }

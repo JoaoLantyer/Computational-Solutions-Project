@@ -118,8 +118,7 @@ public class Filme {
 
         genero = selecionarGenero();
 
-        System.out.print("INFORME A CLASSIFICACAO INDICATIVA: ");
-        classificacao = scan.nextLine();
+        classificacao = selecionarClassificacao();
 
         System.out.print("INFORME A DURACAO (EM MINUTOS): ");
         duracao = scan.nextInt();
@@ -176,6 +175,7 @@ public class Filme {
         System.out.println("[ 9 ] Ficcao Cientifica     [10 ] Faroeste      [11 ] Guerra          |");
         System.out.println("[12 ] Musical               [13 ] Romance       [14 ] Suspense        |");
         System.out.println("[15 ] Terror                [16 ] Outro                               |");
+        System.out.println("|                                                                     |");
         System.out.println("-----------------------------------------------------------------------");
         System.out.print("SUA ESCOLHA: ");
         escolhaGenero = scan.nextInt();
@@ -235,4 +235,48 @@ public class Filme {
         }
         return generoEscolhido;
     }
+
+    public static String selecionarClassificacao(){
+
+        int escolhaClassificacao;
+        String classificacaoEscolhida;
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("|                SELECIONE A CLASSIFICACAO INDICATIVA:                |");
+        System.out.println("|                                                                     |");
+        System.out.println("[ 1 ] Livre                 [ 2 ] 10 anos         [ 3 ] 12 anos       |");
+        System.out.println("[ 4 ] 14 anos               [ 5 ] 16 anos         [ 6 ] 18 anos       |");
+        System.out.println("|                                                                     |");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.print("SUA ESCOLHA: ");
+        escolhaClassificacao = scan.nextInt();
+
+        switch (escolhaClassificacao){
+            case 1: classificacaoEscolhida = "Livre";
+                break;
+
+            case 2: classificacaoEscolhida = "10 anos";
+                break;
+
+            case 3: classificacaoEscolhida = "12 anos";
+                break;
+
+            case 4: classificacaoEscolhida = "14 anos";
+                break;
+
+            case 5: classificacaoEscolhida = "16 anos";
+                break;
+
+            case 6: classificacaoEscolhida = "18 anos";
+                break;
+
+            default: classificacaoEscolhida = "Nao Escolhido";
+                System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 6 PARA SELECIONAR A CLASSIFICACAO INDICATIVA!\n");
+
+        }
+        return classificacaoEscolhida;
+    }
+
 }
