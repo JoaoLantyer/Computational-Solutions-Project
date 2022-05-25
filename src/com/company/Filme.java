@@ -94,7 +94,7 @@ public class Filme {
     //Criando um método para cadastrar o Filme e que irá retornar um objeto Filme
     public static Filme cadastrarFilme(){
 
-        System.out.println("\nVOCÊ SELECIONOU: [4] CADASTRAR FILME\n");
+        System.out.println("\nVOCE SELECIONOU: [4] CADASTRAR FILME\n");
 
         Scanner scan = new Scanner(System.in);
 
@@ -110,22 +110,21 @@ public class Filme {
         idFilmeLista.add(id);
         id = idFilmeLista.size();
 
-        System.out.print("INFORME O TÍTULO: ");
+        System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
         titulo = scan.nextLine();
 
-        System.out.print("INFORME O DIRETOR: ");
+        System.out.print("INFORME O DIRETOR (SEM CARACTERES ESPECIAIS): ");
         diretor = scan.nextLine();
 
-        System.out.print("INFORME O GÊNERO: ");
-        genero = scan.nextLine();
+        genero = selecionarGenero();
 
-        System.out.print("INFORME A CLASSIFICAÇÃO INDICATIVA: ");
+        System.out.print("INFORME A CLASSIFICACAO INDICATIVA: ");
         classificacao = scan.nextLine();
 
-        System.out.print("INFORME A DURAÇÃO (EM MINUTOS): ");
+        System.out.print("INFORME A DURACAO (EM MINUTOS): ");
         duracao = scan.nextInt();
 
-        System.out.print("INFORME A QUANTIDADE DE CÓPIAS DISPONÍVEIS: ");
+        System.out.print("INFORME A QUANTIDADE DE COPIAS DISPONIVEIS: ");
         quantidade = scan.nextInt();
 
         System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
@@ -142,23 +141,98 @@ public class Filme {
     //Criando um método que imprime todos os atributos do Filme
     public void imprimirFilme(){
         				
-				System.out.println("| " + titulo + " | " + diretor + "|" + classificacao + " | ");      
-        System.out.println("-----------------------------------------------------------\n");
+				System.out.printf("|%-60s%-40s%-10s|\n", titulo, diretor, genero);
     }
 
     //Criando um método que recebe um ArrayList de um objeto Filme, neste caso listaFilme
     public static void consultarFilme(ArrayList<Filme> listaFilme){
 
-        System.out.println("\nVOCÊ SELECIONOU: [5] CONSULTAR FILME\n");
+        System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR FILME\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaFilme, e imprima o seu resultado por meio do método imprimirFilme(), para cada umFilme.
-				System.out.println("-----------------------------------------------------------");
-				System.out.println("|      TITULO       |       DIRETOR       |  C. INDICATIVA |");
+				System.out.println("----------------------------------------------------------------------------------------------------------------");
+				System.out.println("|                          TITULO                           |                DIRETOR                |  GENERO  |");
         for (Filme umFilme : listaFilme) {
             umFilme.imprimirFilme();
         }
-        System.out.println("-----------------------------------------------------------");
-        System.out.println("|                    FIM DA CONSULTA                      |");
-        System.out.println("-----------------------------------------------------------\n");
+        System.out.println("----------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                     FIM DA CONSULTA                                          |");
+        System.out.println("----------------------------------------------------------------------------------------------------------------\n");
+    }
+
+    public static String selecionarGenero(){
+
+        int escolhaGenero;
+        String generoEscolhido;
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("|                         SELECIONE O GENERO:                         |");
+        System.out.println("|                                                                     |");
+        System.out.println("[ 1 ] Acao                  [ 2 ] Animacao      [ 3 ] Aventura        |");
+        System.out.println("[ 4 ] Biografia             [ 5 ] Comedia       [ 6 ] Crime           |");
+        System.out.println("[ 7 ] Documentario          [ 7 ] Drama         [ 8 ] Fantasia        |");
+        System.out.println("[ 9 ] Ficcao Cientifica     [10 ] Faroeste      [11 ] Guerra          |");
+        System.out.println("[12 ] Musical               [13 ] Romance       [14 ] Suspense        |");
+        System.out.println("[15 ] Terror                [16 ] Outro                               |");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.print("SUA ESCOLHA: ");
+        escolhaGenero = scan.nextInt();
+
+        switch (escolhaGenero){
+            case 1: generoEscolhido = "Acao";
+            break;
+
+            case 2: generoEscolhido = "Animacao";
+            break;
+
+            case 3: generoEscolhido = "Aventura";
+            break;
+
+            case 4: generoEscolhido = "Biografia";
+            break;
+
+            case 5: generoEscolhido = "Comedia";
+            break;
+
+            case 6: generoEscolhido = "Crime";
+            break;
+
+            case 7: generoEscolhido = "Drama";
+            break;
+
+            case 8: generoEscolhido = "Fantasia";
+            break;
+
+            case 9: generoEscolhido = "Ficcao Cientifica";
+            break;
+
+            case 10: generoEscolhido = "Faroeste";
+            break;
+
+            case 11: generoEscolhido = "Guerra";
+            break;
+
+            case 12: generoEscolhido = "Musical";
+            break;
+
+            case 13: generoEscolhido = "Romance";
+            break;
+
+            case 14: generoEscolhido = "Suspense";
+            break;
+
+            case 15: generoEscolhido = "Terror";
+            break;
+
+            case 16: generoEscolhido = "Outro";
+            break;
+
+            default: generoEscolhido = "Nao Escolhido";
+            System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 16 PARA SELECIONAR O GENERO!\n");
+
+        }
+        return generoEscolhido;
     }
 }

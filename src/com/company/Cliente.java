@@ -71,7 +71,7 @@ public class Cliente {
         //Criando uma variável de referência do objeto Cliente
         Cliente cliente;
 
-        System.out.print("INFORME A SEGUIR O NOME DO CLIENTE: ");
+        System.out.print("INFORME A SEGUIR O PRIMEIRO E ULTIMO NOME DO CLIENTE (SEM CARACTERES ESPECIAIS): ");
         nome = scan.nextLine();
 
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE: ");
@@ -99,8 +99,7 @@ public class Cliente {
     //Criando um método que imprime todos os atributos do Cliente
     public void imprimirCliente(){
        
-				System.out.println("| " + nome + " | " + cpf + "|" + email + " | ");
-        System.out.println("-----------------------------------------------------------\n");
+				System.out.printf("|%-40s%-14s%-40s|\n", nome, cpf, email);
     }
 
     //Criando um método que recebe um ArrayList de um objeto Cliente, neste caso listaCliente
@@ -109,13 +108,13 @@ public class Cliente {
         System.out.println("\nVOCÊ SELECIONOU: [3] CONSULTAR CLIENTE\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaCliente, e imprima o seu resultado por meio do método imprimirCliente(), para cada umCliente.
-			 	System.out.println("-----------------------------------------------------------");
-				System.out.println("|      NOME       |       CPF        |       EMAIL      |");
+			 	System.out.println("------------------------------------------------------------------------------------------------");
+				System.out.println("|                   NOME                |     CPF     |                  EMAIL                 |");
         for (Cliente umCliente : listaCliente) {
             umCliente.imprimirCliente();
         }
-        System.out.println("-----------------------------------------------------------");
-        System.out.println("|                    FIM DA CONSULTA                      |");
-        System.out.println("-----------------------------------------------------------\n");
+        System.out.println("------------------------------------------------------------------------------------------------");
+        System.out.println("|                                       FIM DA CONSULTA                                        |");
+        System.out.println("------------------------------------------------------------------------------------------------\n");
     }
 }
