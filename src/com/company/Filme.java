@@ -141,15 +141,8 @@ public class Filme {
 
     //Criando um método que imprime todos os atributos do Filme
     public void imprimirFilme(){
-        System.out.println("-----------------------------------------------------------");
-        System.out.println("| ID DO FILME: " + id);
-        System.out.println("| TÍTULO DO FILME: " + titulo);
-        System.out.println("| DIRETOR: " + diretor);
-        System.out.println("| GÊNERO: " + genero);
-        System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + classificacao);
-        System.out.println("| DURAÇÃO: " + duracao + " MINUTOS");
-        System.out.println("| UNIDADES DISPONÍVEIS: " + quantidade);
-        System.out.println("| VALOR POR UNIDADE: R$ " + valor);
+        				
+				System.out.println("| " + titulo + " | " + diretor + "|" + classificacao + " | ");      
         System.out.println("-----------------------------------------------------------\n");
     }
 
@@ -159,6 +152,8 @@ public class Filme {
         System.out.println("\nVOCÊ SELECIONOU: [5] CONSULTAR FILME\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaFilme, e imprima o seu resultado por meio do método imprimirFilme(), para cada umFilme.
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("|      TITULO       |       DIRETOR       |  C. INDICATIVA |");
         for (Filme umFilme : listaFilme) {
             umFilme.imprimirFilme();
         }
