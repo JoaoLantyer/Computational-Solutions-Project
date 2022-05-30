@@ -29,7 +29,7 @@ public class Menu {
         clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
         clienteLista.add(new Cliente("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
         clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
-        clienteLista.add(new Cliente("Leoni Mascarenhas", "444444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
+        clienteLista.add(new Cliente("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
         filmeLista.add(new Filme(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Acao", "12 anos", 152, 5, 7.90f));
         filmeLista.add(new Filme(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
         filmeLista.add(new Filme(3, "O Poderoso Chefao", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
@@ -50,7 +50,7 @@ public class Menu {
             //Atribuindo o valor da variável "escolha" ao que for digitado no teclado do usuário
             escolha = scan.nextInt();
 
-            //Criando uma estrutura de decisão "switch case" que terá a variável "num" como a variável de controle e selecionará uma das 8 opções dependendo do que o usuário digitou
+            //Criando uma estrutura de decisão "switch case" que terá a variável "escolha" como a variável de controle e selecionará uma das 8 opções dependendo do que o usuário digitou
             switch (escolha) {
                 //Caso o usuário tenha digitado 1, será executado o método realizarAluguel()
                 case 1: realizarAluguel();
@@ -133,10 +133,10 @@ public class Menu {
         for (Cliente umCliente : clienteLista) {
             if (respCliente.equals(umCliente.getCpf())) {
                 System.out.println("-----------------------------------------------------------");
-                System.out.println("| NOME: " + umCliente.getNome());
-                System.out.println("| TELEFONE: " + umCliente.getTelefone());
-                System.out.println("| E-MAIL: " + umCliente.getEmail());
-                System.out.println("| CEP: " + umCliente.getCep());
+                System.out.printf("| NOME: %-50s|\n", umCliente.getNome());
+                System.out.printf("| TELEFONE: %-46s|\n", umCliente.getTelefone());
+                System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
+                System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
                 System.out.println("-----------------------------------------------------------\n");
             }
 
@@ -154,14 +154,14 @@ public class Menu {
                 if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
                     if(umFilme.getQuantidade() > 0) {
                         System.out.println("-----------------------------------------------------------");
-                        System.out.println("| ID DO FILME: " + umFilme.getId());
-                        System.out.println("| DIRETOR: " + umFilme.getDiretor());
-                        System.out.println("| GENERO: " + umFilme.getGenero());
-                        System.out.println("| CLASSIFICAÇÃO INDICATIVA: " + umFilme.getClassificacao());
-                        System.out.println("| DURACAO: " + umFilme.getDuracao() + " MINUTOS");
-                        System.out.println("| UNIDADES DISPONIVEIS APOS O ALUGUEL: " + (umFilme.getQuantidade() + menos));
+                        System.out.printf("| ID DO FILME: %-43s|\n", umFilme.getId());
+                        System.out.printf("| DIRETOR: %-47s|\n", umFilme.getDiretor());
+                        System.out.printf("| GENERO: %-48s|\n", umFilme.getGenero());
+                        System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umFilme.getClassificacao());
+                        System.out.printf("| DURACAO (EM MINUTOS): %-34s|\n", umFilme.getDuracao());
+                        System.out.printf("| UNIDADES DISPONIVEIS APOS O ALUGUEL: %-19s|\n", (umFilme.getQuantidade() + menos));
                         umFilme.setQuantidade(umFilme.getQuantidade() + menos);
-                        System.out.println("| VALOR POR UNIDADE: R$ " + umFilme.getValor());
+                        System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umFilme.getValor());
                         System.out.println("-----------------------------------------------------------\n");
 
                         /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
@@ -190,8 +190,8 @@ public class Menu {
             System.out.println("OPCAO INVALIDA, SAINDO... ");
         }
 
-        System.out.println("VALOR TOTAL: " + valorTotal);
-        System.out.println("--------------------MUITO OBRIGADO!--------------------");
+        System.out.printf("VALOR TOTAL: R$%.2f\n", valorTotal);
+        System.out.println("----------------------MUITO OBRIGADO!----------------------");
 
     }
 
@@ -200,8 +200,10 @@ public class Menu {
         System.out.println("\nVOCE SELECIONOU: [6] ALUGUEIS PENDENTES\n");
         for (int i = 0; i < AluguelClienteLista.size(); i++) {
             System.out.println("-----------------------------------------------------------");
-            System.out.println("|CLIENTE: " + AluguelClienteLista.get(i));
-            System.out.println("|FILME(S) PENDENTE(S): " + AluguelFilmeLista.get(i));
+            System.out.println("|CLIENTE:                                                 |");
+            System.out.printf("|%-57s|\n", AluguelClienteLista.get(i));
+            System.out.println("|FILME(S) PENDENTE(S):                                    |");
+            System.out.printf("|%-57s|\n", AluguelFilmeLista.get(i));
             System.out.println("-----------------------------------------------------------\n");
         }
     }
