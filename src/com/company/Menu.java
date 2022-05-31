@@ -24,6 +24,10 @@ public class Menu {
 
         System.out.println("\n---------------------INICIO DO PROGRAMA--------------------\n");
 
+        //Adicionando um valor inicial a idAluguelLista e a idFilmeLista
+        idAluguelLista.add(0);
+        FilmeControle.idFilmeLista.add(0);
+
         //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
         clienteLista.add(new ClienteControle("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
         clienteLista.add(new ClienteControle("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
@@ -113,18 +117,18 @@ public class Menu {
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
-        //Declarando as variáveis
-        int id = 0;
+        //Declarando as variáveis (o id recebe seu valor do último valor do ArrayList idAluguelLista)
+        int id = idAluguelLista.get(idAluguelLista.size() - 1);
         String respCliente, respFilme, opcao;
         float valorTotal = 0;
         int menos = -1;
 
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR ALUGUEL\n");
 
-        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (o id recebe seu valor por meio do tamanho do ArrayList idAluguelLista)
+        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
         id++;
         idAluguelLista.add(id);
-        id = idAluguelLista.size();
+        id = idAluguelLista.get(idAluguelLista.size() - 1);
         System.out.println("ID DO ALUGUEL: " + id);
 
         //Atribuíndo o cpf do Cliente que irá fazer aluguel numa variável, para que se busque na lista clienteLista um Cliente com o mesmo cpf, e se achar, irá imprimir o resto dos seus dados

@@ -20,17 +20,18 @@ import java.util.Scanner;
 
         Scanner scan = new Scanner(System.in);
 
-        int id = 3, duracao, quantidade;
+        //Declarando as variáveis (o id recebe seu valor do último valor do ArrayList idFilmeLista)
+        int id = idFilmeLista.get(idFilmeLista.size() - 1), duracao, quantidade;
         String titulo, diretor, classificacao, genero;
         float valor;
 
         //Criando uma variável de referência do objeto Filme
         FilmeControle filmeControl;
 
-        //Incrementando o id do Filme, toda vez que o método cadastrarFilme é chamado (o id recebe seu valor por meio do tamanho do ArrayList idFilmeLista)
+        //Incrementando o id do Filme, toda vez que o método cadastrarFilme é chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idFilmeLissta e atribuímos este último valor a variável id)
         id++;
         idFilmeLista.add(id);
-        id = idFilmeLista.size();
+        id = idFilmeLista.get(idFilmeLista.size() - 1);
 
         System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
         titulo = scan.nextLine();
@@ -95,45 +96,45 @@ import java.util.Scanner;
 
                 //Caso o usuário tenha digitado 2, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
                 case 2: escolhaSelecionarGenero = selecionarGenero();
-                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.println("| ID |  GENERO  |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("| ID |           GENERO           |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
 
                     //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo genero seja o mesmo atribuído a variável escolhaSelecionarGenero
                     for (FilmeControle umFilme : listaFilme) {
                         if (escolhaSelecionarGenero.equalsIgnoreCase(umFilme.getGenero())) {
-                            System.out.printf("|%-5d%-11s%-60s%-38s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getGenero(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                            System.out.printf("|%-5d%-29s%-60s%-38s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getGenero(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
                         }
                     }
-                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
                 //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
                 case 3: escolhaSelecionarClassificacao = selecionarClassificacao();
-                    System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |  GENERO  | DURACAO | QUANTIDADE |  VALOR  |");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |           GENERO           | DURACAO | QUANTIDADE |  VALOR |");
 
                     //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo classificacao seja o mesmo atribuído a variável escolhaSelecionarClassificacao
                     for (FilmeControle umFilme : listaFilme) {
                         if (escolhaSelecionarClassificacao.equalsIgnoreCase(umFilme.getClassificacao())) {
-                            System.out.printf("|%-5d%-16s%-60s%-38s%-11s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getClassificacao(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                            System.out.printf("|%-5d%-16s%-60s%-38s%-29s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getClassificacao(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
                         }
                     }
-                    System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
                 //Caso o usuário tenha digitado 4, será solicitado que ele digite o título do Filme que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
                 case 4: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
                     escolhaTitulo = scan.nextLine();
-                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("| ID |                          TITULO                           |               DIRETOR               |           GENERO           | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
 
                     //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
                     for (FilmeControle umFilme : listaFilme) {
                         if (escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())) {
-                            System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                            System.out.printf("|%-5d%-60s%-38s%-29s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
                         }
                     }
-                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                    System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
                 //Caso o usuário digite 5, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
@@ -150,7 +151,7 @@ import java.util.Scanner;
     //Criando um método que imprime os atributos titulo, diretor e genero do Filme, e separando-os respectivamente para enquadrar na tabela
     public void imprimirFilme(){
 
-        System.out.printf("|%-60s%-40s%-10s|\n", titulo, diretor, genero);
+        System.out.printf("|%-60s%-40s%-28s|\n", titulo, diretor, genero);
     }
 
     //Criando um método que recebe um ArrayList de um objeto Filme, neste caso listaFilme
@@ -159,14 +160,14 @@ import java.util.Scanner;
         System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR FILME\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaFilme, e imprima o seu resultado por meio do método imprimirFilme(), para cada umFilme.
-        System.out.println("----------------------------------------------------------------------------------------------------------------");
-        System.out.println("|                          TITULO                           |                DIRETOR                |  GENERO  |");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                          TITULO                           |                DIRETOR                |           GENERO           |");
         for (FilmeControle umFilme : listaFilme) {
             umFilme.imprimirFilme();
         }
-        System.out.println("----------------------------------------------------------------------------------------------------------------");
-        System.out.println("|                                                     FIM DA CONSULTA                                          |");
-        System.out.println("----------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                         FIM DA CONSULTA                                                        |");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
     /*Criando um método que imprimirá um menu de escolha de gênero, e depois,a partir de uma estrutura de decisão "switch case",
