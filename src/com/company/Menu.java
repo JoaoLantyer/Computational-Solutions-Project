@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Menu {
 
     //Declarando os ArrayLists que irão receber os Objetos da classe Cliente e Filme respectivamente
-    ArrayList<Cliente> clienteLista = new ArrayList<>();
-    ArrayList<Filme> filmeLista = new ArrayList<>();
+    ArrayList<ClienteControle> clienteLista = new ArrayList<>();
+    ArrayList<FilmeControle> filmeLista = new ArrayList<>();
 
     //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String
     ArrayList<Integer> idAluguelLista = new ArrayList<>();
@@ -25,19 +25,19 @@ public class Menu {
         System.out.println("\n---------------------INICIO DO PROGRAMA--------------------\n");
 
         //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
-        clienteLista.add(new Cliente("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
-        clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
-        clienteLista.add(new Cliente("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
-        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
-        clienteLista.add(new Cliente("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
-        filmeLista.add(new Filme(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Acao", "12 anos", 152, 5, 7.90f));
-        filmeLista.add(new Filme(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
-        filmeLista.add(new Filme(3, "O Poderoso Chefao", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
+        clienteLista.add(new ClienteControle("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
+        clienteLista.add(new ClienteControle("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
+        clienteLista.add(new ClienteControle("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
+        clienteLista.add(new ClienteControle("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
+        clienteLista.add(new ClienteControle("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
+        filmeLista.add(new FilmeControle(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Acao", "12 anos", 152, 5, 7.90f));
+        filmeLista.add(new FilmeControle(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
+        filmeLista.add(new FilmeControle(3, "O Poderoso Chefao", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
 
         //Adicionando 3 elementos no ArrayList idFilmeLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista
-        Filme.idFilmeLista.add(1);
-        Filme.idFilmeLista.add(2);
-        Filme.idFilmeLista.add(3);
+        FilmeControle.idFilmeLista.add(1);
+        FilmeControle.idFilmeLista.add(2);
+        FilmeControle.idFilmeLista.add(3);
 
         //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 7(sair)
         do{
@@ -57,19 +57,19 @@ public class Menu {
                 break;
 
                 //Caso o usuário tenha digitado 2, será executado o método da classe cliente cadastrarCliente() e o retorno deste será adicionado ao ArrayList clienteLista
-                case 2: clienteLista.add(Cliente.cadastrarCliente());
+                case 2: clienteLista.add(ClienteControle.cadastrarCliente());
                 break;
 
                 //Caso o usuário tenha digitado 3, será executado o método da classe cliente consultarCliente() no ArrayList clienteLista
-                case 3: Cliente.consultarCliente(clienteLista);
+                case 3: ClienteControle.consultarCliente(clienteLista);
                 break;
 
                 //Caso o usuário tenha digitado 4, será executado o método da classe Filme cadastrarFilme() e o retorno deste será adicionado ao ArrayList filmeLista
-                case 4: filmeLista.add(Filme.cadastrarFilme());
+                case 4: filmeLista.add(FilmeControle.cadastrarFilme());
                 break;
 
                 //Caso o usuário tenha digitado 5, será executado o método da classe Filme consultarFilme() no ArrayList filmeLista
-                case 5: Filme.consultarFilme(filmeLista);
+                case 5: FilmeControle.consultarFilme(filmeLista);
                 break;
 
                 //Caso o usuário tenha digitado 6, será executado o método pendencias()
