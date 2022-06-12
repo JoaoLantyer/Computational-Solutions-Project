@@ -4,56 +4,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 //Criando a classe Filme
-public class Filme {
+public class Filme extends Midia{
 
     //Declarando os atributos
-    protected int id, duracao, quantidade;
-    protected String titulo, diretor, classificacao, genero;
-    protected float valor;
+    private int duracao;
+    private String diretor;
+
+    //Criando um ArrayList idFilmeLista, que irá receber o id de cada Filme em Integer
+    static ArrayList<Integer> idFilmeLista = new ArrayList<>();
 
     //Gerando o construtor
-    public Filme(int id, String titulo, String diretor, String genero, String classificacao, int duracao, int quantidade, float valor) {
-        this.id = id;
+    public Filme(int id, int quantidade, String titulo, String classificacao, String tipo, float valor, int duracao, String diretor, String genero) {
+        super(id, quantidade, titulo, classificacao, tipo, valor, genero);
         this.duracao = duracao;
-        this.quantidade = quantidade;
-        this.titulo = titulo;
         this.diretor = diretor;
-        this.classificacao = classificacao;
-        this.genero = genero;
-        this.valor = valor;
     }
 
     //Gerando os Getters e Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getDuracao() {
         return duracao;
     }
 
     public void setDuracao(int duracao) {
         this.duracao = duracao;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
     }
 
     public String getDiretor() {
@@ -64,28 +37,310 @@ public class Filme {
         this.diretor = diretor;
     }
 
-    public String getClassificacao() {
-        return classificacao;
+    //Criando um método para cadastrar o Filme e que irá retornar um objeto Filme
+    public static Filme cadastrarFilme(){
+
+        System.out.println("\nVOCE SELECIONOU: [4] CADASTRAR FILME\n");
+
+        Scanner scan = new Scanner(System.in);
+
+        //Declarando as variáveis (o id recebe seu valor do último valor do ArrayList idFilmeLista)
+        int id = idFilmeLista.get(idFilmeLista.size() - 1), duracao, quantidade;
+        String titulo, diretor, classificacao, genero, tipo = "Filme";
+        float valor;
+
+        //Criando uma variável de referência do objeto Filme
+        Filme filme;
+
+        //Incrementando o id do Filme, toda vez que o método cadastrarFilme é chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idFilmeLista e atribuímos este último valor a variável id)
+        id++;
+        idFilmeLista.add(id);
+        id = idFilmeLista.get(idFilmeLista.size() - 1);
+
+        System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
+        titulo = scan.nextLine();
+
+        System.out.print("INFORME O DIRETOR (SEM CARACTERES ESPECIAIS): ");
+        diretor = scan.nextLine();
+
+        genero = selecionarGeneroFilme();
+
+        classificacao = selecionarClassificacao();
+
+        System.out.print("INFORME A DURACAO (EM MINUTOS): ");
+        duracao = scan.nextInt();
+
+        System.out.print("INFORME A QUANTIDADE DE COPIAS DISPONIVEIS: ");
+        quantidade = scan.nextInt();
+
+        System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
+        valor = scan.nextFloat();
+
+        //Instanciando um Objeto Filme na variável filme, com os atributos escolhidos acima
+        filme = new Filme(id, quantidade, titulo, classificacao, tipo, valor, duracao, diretor, genero);
+
+        //Retornando a variável filme que o objeto Filme foi instanciado
+        return filme;
+
     }
 
-    public void setClassificacao(String classificacao) {
-        this.classificacao = classificacao;
+    //Criando um método que abrirá o sub-menu consultarFilme, este método recebe um ArrayList de um objeto Filme, neste caso listaFilme
+    public static void consultarFilme(ArrayList<Filme> listaFilme){
+
+        Scanner scan = new Scanner(System.in);
+
+        int escolhaConsultarFilme;
+        String escolhaSelecionarGenero, escolhaSelecionarClassificacao, escolhaTitulo;
+
+        //Criando uma estrutura de repetição "do while" para que o Sub-Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 8(sair)
+        do{
+
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("|                 SUB-MENU CONSULTAR FILME                |");
+        System.out.println("|                                                         |");
+        System.out.println("|   [1] LISTAR TODOS OS FILMES                            |");
+        System.out.println("|   [2] LISTAR FILMES POR GENERO                          |");
+        System.out.println("|   [3] LISTAR FILMES POR CLASSIFICACAO INDICATIVA        |");
+        System.out.println("|   [4] BUSCAR UM FILME ESPECIFICO                        |");
+        System.out.println("|   [5] ATUALIZAR UM FILME                                |");
+        System.out.println("|   [6] REMOVER UM FILME DO SISTEMA                       |");
+        System.out.println("|   [7] RETORNAR AO MENU PRINCIPAL                        |");
+        System.out.println("|                                                         |");
+        System.out.println("-----------------------------------------------------------");
+
+        System.out.print("DIGITE UM NUMERO ENTRE 1 E 7 PARA UTILIZAR O MENU: ");
+        escolhaConsultarFilme = scan.nextInt();
+
+        scan.nextLine();
+
+        //Criando uma estrutura de decisão "switch case" que terá a variável "escolhaConsultarFilme" como a variável de controle e selecionará uma das 6 opções dependendo do que o usuário digitou
+        switch(escolhaConsultarFilme) {
+
+            //Caso o usuário tenha digitado 1, será executado o método listarFilme no ArrayList listaFilme
+            case 1: listarFilme(listaFilme);
+                break;
+
+            //Caso o usuário tenha digitado 2, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
+            case 2: escolhaSelecionarGenero = selecionarGeneroFilme();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |           GENERO           |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+
+                //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo genero seja o mesmo atribuído a variável escolhaSelecionarGenero
+                for (Filme umFilme : listaFilme) {
+                    if (escolhaSelecionarGenero.equalsIgnoreCase(umFilme.getGenero())) {
+                        System.out.printf("|%-5d%-29s%-60s%-38s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getGenero(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());                    }
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+
+            //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
+            case 3: escolhaSelecionarClassificacao = selecionarClassificacao();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |           GENERO           | DURACAO | QUANTIDADE |  VALOR |");
+
+                //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo classificacao seja o mesmo atribuído a variável escolhaSelecionarClassificacao
+                for (Filme umFilme : listaFilme) {
+                    if (escolhaSelecionarClassificacao.equalsIgnoreCase(umFilme.getClassificacao())) {
+                        System.out.printf("|%-5d%-16s%-60s%-38s%-29s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getClassificacao(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                    }
+                }
+                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+
+            //Caso o usuário tenha digitado 4, será solicitado que ele digite o título do Filme que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
+            case 4: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
+                escolhaTitulo = scan.nextLine();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |                          TITULO                           |               DIRETOR               |           GENERO           | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+
+                //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
+                for (Filme umFilme : listaFilme) {
+                    if (escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())) {
+                        System.out.printf("|%-5d%-60s%-38s%-29s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                    }
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+
+            case 5:
+                System.out.print("DIGITE O TITULO DO FILME QUE DESEJA ATUALIZAR: ");
+                escolhaTitulo = scan.nextLine();
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                for(Filme umFilme : listaFilme) {
+                    if (escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())){
+                        System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+                        System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
+                        String novoTitulo = scan.nextLine();
+                        umFilme.setTitulo(novoTitulo);
+                        System.out.print("INFORME O DIRETOR (SEM CARACTERES ESPECIAIS): ");
+                        String novoDiretor = scan.nextLine();
+                        umFilme.setDiretor(novoDiretor);
+                        String novoGenero = selecionarGeneroFilme();
+                        umFilme.setGenero(novoGenero);
+                        String novoClassificacao = selecionarClassificacao();
+                        umFilme.setClassificacao(novoClassificacao);
+                        System.out.print("INFORME A DURACAO (EM MINUTOS): ");
+                        int novoDuracao = scan.nextInt();
+                        umFilme.setDuracao(novoDuracao);
+                        System.out.print("INFORME A QUANTIDADE DE COPIAS DISPONIVEIS: ");
+                        int novoQuantidade = scan.nextInt();
+                        umFilme.setQuantidade(novoQuantidade);
+                        System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
+                        float novoValor = scan.nextFloat();
+                        umFilme.setValor(novoValor);
+                        System.out.println("\nREGISTRO ATUALIZADO: ");
+                        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                        System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                        System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                    }
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                break;
+
+            case 6:
+                System.out.print("DIGITE O TITULO DO FILME QUE DESEJA REMOVER DO SISTEMA: ");
+                escolhaTitulo = scan.nextLine();
+                int posicao = 0;
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+                for(Filme umFilme : listaFilme) {
+                    if(escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())){
+                        System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                        posicao = listaFilme.lastIndexOf(umFilme);
+                    }
+                }
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("GOSTARIA DE REMOVER ESTE FILME? [SIM/NAO]");
+                String opcao = scan.nextLine();
+                if(opcao.equalsIgnoreCase("SIM")){
+                    listaFilme.remove(posicao);
+                    System.out.println("\nFILME REMOVIDO COM SUCESSO!");
+                } else if (opcao.equalsIgnoreCase("NAO")) {
+                    System.out.println("O FILME NAO FOI REMOVIDO DO SISTEMA...");
+                    System.out.println("VOLTANDO PARA O SUB-MENU...");
+                }else{
+                    System.out.println("OPCAO INVALIDA! ");
+                    System.out.println("VOLTANDO PARA O SUB-MENU...");
+                }
+                break;
+
+
+            //Caso o usuário digite 7, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+            case 7: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
+                break;
+
+                //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 5 PARA UTILIZAR O SUB-MENU CONSULTAR FILME!\n");
+        }
+        }while(escolhaConsultarFilme != 7);
+
     }
 
-    public String getGenero() {
-        return genero;
+    //Criando um método que imprime os atributos titulo, diretor e genero do Filme, e separando-os respectivamente para enquadrar na tabela
+    public void imprimirFilme(){
+
+        System.out.printf("|%-60s%-40s%-28s|\n", titulo, diretor, genero);
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
+    //Criando um método que recebe um ArrayList de um objeto Filme, neste caso listaFilme
+    public static void listarFilme(ArrayList<Filme> listaFilme){
+
+        System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR FILME\n");
+
+        //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaFilme, e imprima o seu resultado por meio do método imprimirFilme(), para cada umFilme.
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                          TITULO                           |                DIRETOR                |           GENERO           |");
+        for (Filme umFilme : listaFilme) {
+            umFilme.imprimirFilme();
+        }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("|                                                         FIM DA CONSULTA                                                        |");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
-    public float getValor() {
-        return valor;
-    }
+    /*Criando um método que imprimirá um menu de escolha de gênero, e depois,a partir de uma estrutura de decisão "switch case",
+    o usuário será convidado a escolher um dos gêneros que foram imprimidos na tela, este gênero será o retorno, em String, do método.*/
+    public static String selecionarGeneroFilme(){
 
-    public void setValor(float valor) {
-        this.valor = valor;
+        int escolhaGenero;
+        String generoEscolhido;
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("|                         SELECIONE O GENERO:                         |");
+        System.out.println("|                                                                     |");
+        System.out.println("|   [ 1 ] Acao                  [ 2 ] Animacao      [ 3 ] Aventura    |");
+        System.out.println("|   [ 4 ] Biografia             [ 5 ] Comedia       [ 6 ] Crime       |");
+        System.out.println("|   [ 7 ] Documentario          [ 8 ] Drama         [ 9 ] Fantasia    |");
+        System.out.println("|   [10 ] Ficcao Cientifica     [11 ] Faroeste      [12 ] Guerra      |");
+        System.out.println("|   [13 ] Musical               [14 ] Romance       [15 ] Suspense    |");
+        System.out.println("|   [16 ] Terror                [17 ] Outro                           |");
+        System.out.println("|                                                                     |");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.print("SUA ESCOLHA: ");
+        escolhaGenero = scan.nextInt();
+
+        switch (escolhaGenero){
+            case 1: generoEscolhido = "Acao";
+            break;
+
+            case 2: generoEscolhido = "Animacao";
+            break;
+
+            case 3: generoEscolhido = "Aventura";
+            break;
+
+            case 4: generoEscolhido = "Biografia";
+            break;
+
+            case 5: generoEscolhido = "Comedia";
+            break;
+
+            case 6: generoEscolhido = "Crime";
+            break;
+
+            case 7: generoEscolhido = "Documentario";
+            break;
+
+            case 8: generoEscolhido = "Drama";
+            break;
+
+            case 9: generoEscolhido = "Fantasia";
+            break;
+
+            case 10: generoEscolhido = "Ficcao Cientifica";
+            break;
+
+            case 11: generoEscolhido = "Faroeste";
+            break;
+
+            case 12: generoEscolhido = "Guerra";
+            break;
+
+            case 13: generoEscolhido = "Musical";
+            break;
+
+            case 14: generoEscolhido = "Romance";
+            break;
+
+            case 15: generoEscolhido = "Suspense";
+            break;
+
+            case 16: generoEscolhido = "Terror";
+            break;
+
+            case 17: generoEscolhido = "Outro";
+            break;
+
+            default: generoEscolhido = "Nao Escolhido";
+            System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 17 PARA SELECIONAR O GENERO!\n");
+
+        }
+        return generoEscolhido;
     }
 
 }

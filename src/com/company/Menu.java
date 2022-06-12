@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class Menu {
 
     //Declarando os ArrayLists que irão receber os Objetos da classe Cliente e Filme respectivamente
-    ArrayList<ClienteControle> clienteLista = new ArrayList<>();
-    ArrayList<FilmeControle> filmeLista = new ArrayList<>();
+    ArrayList<Cliente> clienteLista = new ArrayList<>();
+    ArrayList<Filme> filmeLista = new ArrayList<>();
+    ArrayList<Jogo> jogoLista = new ArrayList<>();
 
     //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String
     ArrayList<Integer> idAluguelLista = new ArrayList<>();
@@ -26,22 +27,25 @@ public class Menu {
 
         //Adicionando um valor inicial a idAluguelLista e a idFilmeLista
         idAluguelLista.add(0);
-        FilmeControle.idFilmeLista.add(0);
+        Filme.idFilmeLista.add(0);
 
         //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
-        clienteLista.add(new ClienteControle("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
-        clienteLista.add(new ClienteControle("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
-        clienteLista.add(new ClienteControle("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
-        clienteLista.add(new ClienteControle("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
-        clienteLista.add(new ClienteControle("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
-        filmeLista.add(new FilmeControle(1, "Batman: O Cavaleiro das Trevas", "Christopher Nolan", "Acao", "12 anos", 152, 5, 7.90f));
-        filmeLista.add(new FilmeControle(2, "Um Sonho de Liberdade", "Frank Darabont", "Drama", "16 anos", 142, 5, 5.90f));
-        filmeLista.add(new FilmeControle(3, "O Poderoso Chefao", "Francis Ford Coppola", "Crime", "14 anos", 175, 5, 6.50f));
+        clienteLista.add(new Cliente("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
+        clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
+        clienteLista.add(new Cliente("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
+        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
+        clienteLista.add(new Cliente("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
+        filmeLista.add(new Filme(1, 5, "Batman: O Cavaleiro das Trevas", "12 anos", "Filme", 7.90f, 152, "Christopher Nolan", "Acao"));
+        filmeLista.add(new Filme(2, 5, "Um Sonho de Liberdade", "16 anos", "Filme", 5.90f, 142, "Frank Darabont", "Drama"));
+        filmeLista.add(new Filme(3, 5, "O Poderoso Chefao", "14 anos", "Filme", 6.50f, 175, "Francis Ford Coppola", "Crime"));
+        jogoLista.add(new Jogo(1, 5, "The Legend of Zelda: Ocarina of Time", "12 anos", "Jogo", 5.50f, "Aventura", "Nintendo", "Nintendo 64"));
+        jogoLista.add(new Jogo(2, 5, "Half-Life 2", "16 anos", "Jogo", 5.80f, "Acao", "Valve", "PC"));
+        jogoLista.add(new Jogo(3, 5, "Metal Gear Solid", "18 anos", "Jogo", 5.70f, "Acao", "Konami", "Playstation"));
 
         //Adicionando 3 elementos no ArrayList idFilmeLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista
-        FilmeControle.idFilmeLista.add(1);
-        FilmeControle.idFilmeLista.add(2);
-        FilmeControle.idFilmeLista.add(3);
+        Filme.idFilmeLista.add(1);
+        Filme.idFilmeLista.add(2);
+        Filme.idFilmeLista.add(3);
 
         //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 7(sair)
         do{
@@ -61,34 +65,38 @@ public class Menu {
                 break;
 
                 //Caso o usuário tenha digitado 2, será executado o método da classe cliente cadastrarCliente() e o retorno deste será adicionado ao ArrayList clienteLista
-                case 2: clienteLista.add(ClienteControle.cadastrarCliente());
+                case 2: clienteLista.add(Cliente.cadastrarCliente());
                 break;
 
                 //Caso o usuário tenha digitado 3, será executado o método da classe cliente consultarCliente() no ArrayList clienteLista
-                case 3: ClienteControle.consultarCliente(clienteLista);
+                case 3: Cliente.consultarCliente(clienteLista);
                 break;
 
                 //Caso o usuário tenha digitado 4, será executado o método da classe Filme cadastrarFilme() e o retorno deste será adicionado ao ArrayList filmeLista
-                case 4: filmeLista.add(FilmeControle.cadastrarFilme());
+                case 4: filmeLista.add(Filme.cadastrarFilme());
                 break;
 
                 //Caso o usuário tenha digitado 5, será executado o método da classe Filme consultarFilme() no ArrayList filmeLista
-                case 5: FilmeControle.consultarFilme(filmeLista);
+                case 5: Filme.consultarFilme(filmeLista);
                 break;
 
+                case 6: jogoLista.add(Jogo.cadastrarJogo());
+
+                case 7: Jogo.consultarJogo(jogoLista);
+
                 //Caso o usuário tenha digitado 6, será executado o método pendencias()
-                case 6: pendencias();
+                case 8: pendencias();
                 break;
 
                 //Caso o usuário tenha digitado 7, será executado o método sair()
-                case 7: sair();
+                case 9: sair();
                 break;
 
                 //Caso o usuário tenha digitado qualquer outra coisa, será executado o método mensagemDefault()
                 default: mensagemDefault();
             }
 
-        }while(escolha != 7);
+        }while(escolha != 9);
 
         System.out.println("--------------------PROGRAMA FINALIZADO--------------------");
     }
@@ -104,8 +112,10 @@ public class Menu {
         System.out.println("|                   [3] CONSULTAR CLIENTE                 |");
         System.out.println("|                   [4] CADASTRAR FILME                   |");
         System.out.println("|                   [5] CONSULTAR FILME                   |");
-        System.out.println("|                   [6] ALUGUEIS PENDENTES                |");
-        System.out.println("|                   [7] SAIR                              |");
+        System.out.println("|                   [6] CADASTRAR JOGO                    |");
+        System.out.println("|                   [7] CONSULTAR JOGO                    |");
+        System.out.println("|                   [8] PENDENCIAS                        |");
+        System.out.println("|                   [9] SAIR                              |");
         System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------\n");
 
