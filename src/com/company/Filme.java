@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 //Criando a classe Filme
@@ -12,6 +13,7 @@ public class Filme extends Midia{
 
     //Criando um ArrayList idFilmeLista, que irá receber o id de cada Filme em Integer
     static ArrayList<Integer> idFilmeLista = new ArrayList<>();
+    static ArrayList<String> tituloFilmeLista = new ArrayList<>();
 
     //Gerando o construtor
     public Filme(int id, int quantidade, String titulo, String classificacao, String tipo, float valor, int duracao, String diretor, String genero) {
@@ -79,6 +81,8 @@ public class Filme extends Midia{
         //Instanciando um Objeto Filme na variável filme, com os atributos escolhidos acima
         filme = new Filme(id, quantidade, titulo, classificacao, tipo, valor, duracao, diretor, genero);
 
+        tituloFilmeLista.add(titulo);
+
         //Retornando a variável filme que o objeto Filme foi instanciado
         return filme;
 
@@ -99,16 +103,17 @@ public class Filme extends Midia{
         System.out.println("|                 SUB-MENU CONSULTAR FILME                |");
         System.out.println("|                                                         |");
         System.out.println("|   [1] LISTAR TODOS OS FILMES                            |");
-        System.out.println("|   [2] LISTAR FILMES POR GENERO                          |");
-        System.out.println("|   [3] LISTAR FILMES POR CLASSIFICACAO INDICATIVA        |");
-        System.out.println("|   [4] BUSCAR UM FILME ESPECIFICO                        |");
-        System.out.println("|   [5] ATUALIZAR UM FILME                                |");
-        System.out.println("|   [6] REMOVER UM FILME DO SISTEMA                       |");
-        System.out.println("|   [7] RETORNAR AO MENU PRINCIPAL                        |");
+        System.out.println("|   [2] LISTAR TODOS OS FILMES ALFABETICAMENTE            |");
+        System.out.println("|   [3] LISTAR FILMES POR GENERO                          |");
+        System.out.println("|   [4] LISTAR FILMES POR CLASSIFICACAO INDICATIVA        |");
+        System.out.println("|   [5] BUSCAR UM FILME ESPECIFICO                        |");
+        System.out.println("|   [6] ATUALIZAR UM FILME                                |");
+        System.out.println("|   [7] REMOVER UM FILME DO SISTEMA                       |");
+        System.out.println("|   [8] RETORNAR AO MENU PRINCIPAL                        |");
         System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------");
 
-        System.out.print("DIGITE UM NUMERO ENTRE 1 E 7 PARA UTILIZAR O MENU: ");
+        System.out.print("DIGITE UM NUMERO ENTRE 1 E 8 PARA UTILIZAR O MENU: ");
         escolhaConsultarFilme = scan.nextInt();
 
         scan.nextLine();
@@ -118,10 +123,13 @@ public class Filme extends Midia{
 
             //Caso o usuário tenha digitado 1, será executado o método listarFilme no ArrayList listaFilme
             case 1: listarFilme(listaFilme);
-                break;
+            break;
 
-            //Caso o usuário tenha digitado 2, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
-            case 2: escolhaSelecionarGenero = selecionarGeneroFilme();
+            case 2: listarFilmeAlfabeticamente(listaFilme);
+            break;
+
+            //Caso o usuário tenha digitado 3, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
+            case 3: escolhaSelecionarGenero = selecionarGeneroFilme();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |           GENERO           |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
 
@@ -130,11 +138,11 @@ public class Filme extends Midia{
                     if (escolhaSelecionarGenero.equalsIgnoreCase(umFilme.getGenero())) {
                         System.out.printf("|%-5d%-29s%-60s%-38s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getGenero(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());                    }
                 }
-                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
             //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
-            case 3: escolhaSelecionarClassificacao = selecionarClassificacao();
+            case 4: escolhaSelecionarClassificacao = selecionarClassificacao();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |           GENERO           | DURACAO | QUANTIDADE |  VALOR |");
 
@@ -144,11 +152,11 @@ public class Filme extends Midia{
                         System.out.printf("|%-5d%-16s%-60s%-38s%-29s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getClassificacao(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
                     }
                 }
-                System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            //Caso o usuário tenha digitado 4, será solicitado que ele digite o título do Filme que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
-            case 4: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
+            //Caso o usuário tenha digitado 5, será solicitado que ele digite o título do Filme que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
+            case 5: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
                 escolhaTitulo = scan.nextLine();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |                          TITULO                           |               DIRETOR               |           GENERO           | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
@@ -162,7 +170,7 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            case 5:
+            case 6:
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA ATUALIZAR: ");
                 escolhaTitulo = scan.nextLine();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -174,6 +182,11 @@ public class Filme extends Midia{
 
                         System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
                         String novoTitulo = scan.nextLine();
+                        for(String umTitulo: tituloFilmeLista) {
+                            if (umFilme.getTitulo().equalsIgnoreCase(umTitulo)){
+                                tituloFilmeLista.set(tituloFilmeLista.indexOf(umTitulo), novoTitulo);
+                            }
+                        }
                         umFilme.setTitulo(novoTitulo);
                         System.out.print("INFORME O DIRETOR (SEM CARACTERES ESPECIAIS): ");
                         String novoDiretor = scan.nextLine();
@@ -200,7 +213,7 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            case 6:
+            case 7:
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA REMOVER DO SISTEMA: ");
                 escolhaTitulo = scan.nextLine();
                 int posicao = 0;
@@ -209,7 +222,7 @@ public class Filme extends Midia{
                 for(Filme umFilme : listaFilme) {
                     if(escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())){
                         System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
-                        posicao = listaFilme.lastIndexOf(umFilme);
+                        posicao = listaFilme.indexOf(umFilme);
                     }
                 }
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -217,6 +230,8 @@ public class Filme extends Midia{
                 String opcao = scan.nextLine();
                 if(opcao.equalsIgnoreCase("SIM")){
                     listaFilme.remove(posicao);
+                    tituloFilmeLista.remove(escolhaTitulo);
+
                     System.out.println("\nFILME REMOVIDO COM SUCESSO!");
                 } else if (opcao.equalsIgnoreCase("NAO")) {
                     System.out.println("O FILME NAO FOI REMOVIDO DO SISTEMA...");
@@ -228,14 +243,14 @@ public class Filme extends Midia{
                 break;
 
 
-            //Caso o usuário digite 7, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
-            case 7: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
-                break;
+            //Caso o usuário digite 8, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+            case 8: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
+            break;
 
                 //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
             default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 5 PARA UTILIZAR O SUB-MENU CONSULTAR FILME!\n");
         }
-        }while(escolhaConsultarFilme != 7);
+        }while(escolhaConsultarFilme != 8);
 
     }
 
@@ -260,6 +275,24 @@ public class Filme extends Midia{
         System.out.println("|                                                         FIM DA CONSULTA                                                        |");
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
+
+    public static void listarFilmeAlfabeticamente(ArrayList<Filme> listaFilme){
+
+        Collections.sort(tituloFilmeLista);
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+        for(String umTitulo: tituloFilmeLista){
+
+            for(Filme umFilme : listaFilme){
+                if(umTitulo.equalsIgnoreCase(umFilme.getTitulo())){
+                    System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
+                }
+            }
+
+        }
+        System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+    }
+
 
     /*Criando um método que imprimirá um menu de escolha de gênero, e depois,a partir de uma estrutura de decisão "switch case",
     o usuário será convidado a escolher um dos gêneros que foram imprimidos na tela, este gênero será o retorno, em String, do método.*/

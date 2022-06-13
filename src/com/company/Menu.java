@@ -13,7 +13,7 @@ public class Menu {
     //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String
     ArrayList<Integer> idAluguelLista = new ArrayList<>();
     ArrayList<String> AluguelClienteLista = new ArrayList<>();
-    ArrayList<String> AluguelFilmeLista = new ArrayList<>();
+    ArrayList<String> AluguelLista = new ArrayList<>();
 
     public void executar(){
 
@@ -25,9 +25,10 @@ public class Menu {
 
         System.out.println("\n---------------------INICIO DO PROGRAMA--------------------\n");
 
-        //Adicionando um valor inicial a idAluguelLista e a idFilmeLista
+        //Adicionando um valor inicial a idAluguelLista, a idFilmeLista e idJogoLista
         idAluguelLista.add(0);
         Filme.idFilmeLista.add(0);
+        Jogo.idJogoLista.add(0);
 
         //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
         clienteLista.add(new Cliente("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
@@ -42,10 +43,24 @@ public class Menu {
         jogoLista.add(new Jogo(2, 5, "Half-Life 2", "16 anos", "Jogo", 5.80f, "Acao", "Valve", "PC"));
         jogoLista.add(new Jogo(3, 5, "Metal Gear Solid", "18 anos", "Jogo", 5.70f, "Acao", "Konami", "Playstation"));
 
-        //Adicionando 3 elementos no ArrayList idFilmeLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista
+        //Adicionando 3 elementos no ArrayList idFilmeLista e no idJogoLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme ou jogo, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista/idJogoLista
         Filme.idFilmeLista.add(1);
         Filme.idFilmeLista.add(2);
         Filme.idFilmeLista.add(3);
+        Jogo.idJogoLista.add(1);
+        Jogo.idJogoLista.add(2);
+        Jogo.idJogoLista.add(3);
+        Cliente.nomeClienteLista.add("Joao Lantyer");
+        Cliente.nomeClienteLista.add("Renan Abreu");
+        Cliente.nomeClienteLista.add("Joao Alfredo");
+        Cliente.nomeClienteLista.add("Aldair Lima");
+        Cliente.nomeClienteLista.add("Leoni Mascarenhas");
+        Filme.tituloFilmeLista.add("Batman: O Cavaleiro das Trevas");
+        Filme.tituloFilmeLista.add("Um Sonho de Liberdade");
+        Filme.tituloFilmeLista.add("O Poderoso Chefao");
+        Jogo.tituloJogoLista.add("The Legend of Zelda: Ocarina of Time");
+        Jogo.tituloJogoLista.add("Half-Life 2");
+        Jogo.tituloJogoLista.add("Metal Gear Solid");
 
         //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 7(sair)
         do{
@@ -53,7 +68,7 @@ public class Menu {
             exibirMenu();
 
             System.out.println("==================== ESCOLHA SUA OPCAO ====================");
-            System.out.print("\nDIGITE UM NUMERO ENTRE 1 E 7 PARA UTILIZAR O MENU: ");
+            System.out.print("\nDIGITE UM NUMERO ENTRE 1 E 10 PARA UTILIZAR O MENU: ");
 
             //Atribuindo o valor da variável "escolha" ao que for digitado no teclado do usuário
             escolha = scan.nextInt();
@@ -88,15 +103,18 @@ public class Menu {
                 case 8: pendencias();
                 break;
 
+                case 9: realizarDevolucao();
+                break;
+
                 //Caso o usuário tenha digitado 7, será executado o método sair()
-                case 9: sair();
+                case 10: sair();
                 break;
 
                 //Caso o usuário tenha digitado qualquer outra coisa, será executado o método mensagemDefault()
                 default: mensagemDefault();
             }
 
-        }while(escolha != 9);
+        }while(escolha != 10);
 
         System.out.println("--------------------PROGRAMA FINALIZADO--------------------");
     }
@@ -115,14 +133,43 @@ public class Menu {
         System.out.println("|                   [6] CADASTRAR JOGO                    |");
         System.out.println("|                   [7] CONSULTAR JOGO                    |");
         System.out.println("|                   [8] PENDENCIAS                        |");
-        System.out.println("|                   [9] SAIR                              |");
+        System.out.println("|                   [9] REALIZAR DEVOLUCAO                |");
+        System.out.println("|                   [10] SAIR                             |");
         System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------\n");
 
     }
 
-    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
+
     public void realizarAluguel() {
+
+        Scanner scan = new Scanner(System.in);
+
+        int escolhaAluguel;
+
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("|    VOCE DESEJA FAZER ALUGUEL DE UM FILME OU UM JOGO?    |");
+        System.out.println("|                                                         |");
+        System.out.println("|           [1] FILME                 [2] JOGO            |");
+        System.out.println("|                                                         |");
+        System.out.println("-----------------------------------------------------------");
+
+        System.out.print("SUA ESCOLHA:");
+        escolhaAluguel = scan.nextInt();
+
+        switch(escolhaAluguel){
+            case 1: realizarAluguelFilme();
+            break;
+
+            case 2: realizarAluguelJogo();
+        }
+
+    }
+
+
+
+    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
+    public void realizarAluguelFilme() {
 
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
@@ -133,7 +180,7 @@ public class Menu {
         float valorTotal = 0;
         int menos = -1;
 
-        System.out.println("\nVOCE SELECIONOU: [1] REALIZAR ALUGUEL\n");
+        System.out.println("\nVOCE SELECIONOU: [1] REALIZAR ALUGUEL DE UM FILME\n");
 
         //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
         id++;
@@ -180,7 +227,7 @@ public class Menu {
 
                         /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
                         ArrayList AluguelFilmeLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
-                        AluguelFilmeLista.add(umFilme.getTitulo());
+                        AluguelLista.add(umFilme.getTitulo());
 
                         for (Cliente umCliente : clienteLista) {
                             if (respCliente.equals(umCliente.getCpf())) {
@@ -209,6 +256,221 @@ public class Menu {
 
     }
 
+    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
+    public void realizarAluguelJogo() {
+
+        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
+        Scanner scan = new Scanner(System.in);
+
+        //Declarando as variáveis (o id recebe seu valor do último valor do ArrayList idAluguelLista)
+        int id = idAluguelLista.get(idAluguelLista.size() - 1);
+        String respCliente, respJogo, opcao;
+        float valorTotal = 0;
+        int menos = -1;
+
+        System.out.println("\nVOCE SELECIONOU: [2] REALIZAR ALUGUEL DE UM JOGO\n");
+
+        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
+        id++;
+        idAluguelLista.add(id);
+        id = idAluguelLista.get(idAluguelLista.size() - 1);
+        System.out.println("ID DO ALUGUEL: " + id);
+
+        //Atribuíndo o cpf do Cliente que irá fazer aluguel numa variável, para que se busque na lista clienteLista um Cliente com o mesmo cpf, e se achar, irá imprimir o resto dos seus dados
+        System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
+        respCliente = scan.nextLine();
+        for (Cliente umCliente : clienteLista) {
+            if (respCliente.equals(umCliente.getCpf())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("| NOME: %-50s|\n", umCliente.getNome());
+                System.out.printf("| TELEFONE: %-46s|\n", umCliente.getTelefone());
+                System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
+                System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
+                System.out.println("-----------------------------------------------------------\n");
+            }
+        }
+
+        //Criando uma estrutura de repetição "do while" para repetir esta porção do código, toda vez que o usuário escolher que quer fazer o aluguel de um filme adicional
+        do {
+
+            /*Atribuindo o título do Filme que será alugado numa variável, para que busque na lista filmeLista um Filme com o mesmo título,
+            e se achar, juntamente com o fato de ter mais de 0 unidades, irá imprimir o resto dos dados do mesmo */
+            System.out.print("INFORME A SEGUIR O TITULO DO JOGO QUE DESEJA FAZER O ALUGUEL: ");
+            respJogo = scan.nextLine();
+            for (Jogo umJogo : jogoLista) {
+                if (respJogo.equalsIgnoreCase(umJogo.getTitulo())) {
+                    if(umJogo.getQuantidade() > 0) {
+                        System.out.println("-----------------------------------------------------------");
+                        System.out.printf("| ID DO JOGO: %-44s|\n", umJogo.getId());
+                        System.out.printf("| DESENVOLVEDOR: %-41s|\n", umJogo.getDesenvolvedor());
+                        System.out.printf("| GENERO: %-48s|\n", umJogo.getGenero());
+                        System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umJogo.getClassificacao());
+                        System.out.printf("| PLATAFORMA: %-44s|\n", umJogo.getPlataforma());
+                        System.out.printf("| UNIDADES DISPONIVEIS APOS O ALUGUEL: %-19s|\n", (umJogo.getQuantidade() + menos));
+                        umJogo.setQuantidade(umJogo.getQuantidade() + menos);
+                        System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umJogo.getValor());
+                        System.out.println("-----------------------------------------------------------\n");
+
+                        /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
+                        ArrayList AluguelFilmeLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
+                        AluguelLista.add(umJogo.getTitulo());
+
+                        for (Cliente umCliente : clienteLista) {
+                            if (respCliente.equals(umCliente.getCpf())) {
+                                AluguelClienteLista.add(umCliente.getNome());
+                            }
+                        }
+                        //Atribuindo e somando o valor do Filme alugado ao valorTotal, toda vez que essa operação é repetida, para recebermos o valor total da transação
+                        valorTotal += umJogo.getValor();
+                    }
+                }
+            }
+
+            System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
+            opcao = scan.nextLine();
+
+        }while (opcao.equalsIgnoreCase("SIM"));
+
+        if (opcao.equalsIgnoreCase("NAO")) {
+            System.out.println("SAINDO...");
+        } else {
+            System.out.println("OPCAO INVALIDA, SAINDO... ");
+        }
+
+        System.out.printf("VALOR TOTAL: R$%.2f\n", valorTotal);
+        System.out.println("----------------------MUITO OBRIGADO!----------------------");
+
+    }
+
+    public void realizarDevolucao() {
+
+        Scanner scan = new Scanner(System.in);
+
+        int escolhaDevolucao;
+
+        System.out.println("-----------------------------------------------------------");
+        System.out.println("|   VOCE DESEJA FAZER DEVOLUCAO DE UM FILME OU UM JOGO?   |");
+        System.out.println("|                                                         |");
+        System.out.println("|           [1] FILME                 [2] JOGO            |");
+        System.out.println("|                                                         |");
+        System.out.println("-----------------------------------------------------------");
+
+        System.out.print("SUA ESCOLHA:");
+        escolhaDevolucao = scan.nextInt();
+
+        switch(escolhaDevolucao){
+            case 1: realizarDevolucaoFilme();
+                break;
+
+            case 2: realizarDevolucaoJogo();
+        }
+
+    }
+
+    public void realizarDevolucaoFilme(){
+
+
+        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
+        Scanner scan = new Scanner(System.in);
+
+        String respCliente, respFilme, nomeCliente = "null", tituloFilme;
+        int mais = 1;
+
+        System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM FILME\n");
+
+        System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER A DEVOLUCAO: ");
+        respCliente = scan.nextLine();
+        for (Cliente umCliente : clienteLista) {
+            if (respCliente.equals(umCliente.getCpf())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("| NOME: %-50s|\n", umCliente.getNome());
+                System.out.printf("| TELEFONE: %-46s|\n", umCliente.getTelefone());
+                System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
+                System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
+                System.out.println("-----------------------------------------------------------\n");
+
+                nomeCliente = respCliente;
+            }
+        }
+
+        System.out.print("INFORME A SEGUIR O TITULO DO FILME QUE DESEJA FAZER A DEVOLUCAO: ");
+        respFilme = scan.nextLine();
+        for (Filme umFilme : filmeLista) {
+            if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("| ID DO FILME: %-43s|\n", umFilme.getId());
+                System.out.printf("| DIRETOR: %-47s|\n", umFilme.getDiretor());
+                System.out.printf("| GENERO: %-48s|\n", umFilme.getGenero());
+                System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umFilme.getClassificacao());
+                System.out.printf("| DURACAO (EM MINUTOS): %-34s|\n", umFilme.getDuracao());
+                System.out.printf("| UNIDADES DISPONIVEIS APOS A DEVOLUCAO: %-19s|\n", (umFilme.getQuantidade() + mais));
+                umFilme.setQuantidade(umFilme.getQuantidade() + mais);
+                System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umFilme.getValor());
+                System.out.println("-----------------------------------------------------------\n");
+
+                for (Cliente umCliente : clienteLista) {
+                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umFilme)) {
+                        AluguelLista.remove(umFilme.getTitulo());
+                        AluguelClienteLista.remove(umCliente.getNome());
+                    }
+                }
+            }
+        }
+    }
+
+    public void realizarDevolucaoJogo(){
+
+
+        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
+        Scanner scan = new Scanner(System.in);
+
+        String respCliente, respJogo, nomeCliente = "null", tituloJogo;
+        int mais = 1;
+
+        System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM JOGO\n");
+
+        System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER A DEVOLUCAO: ");
+        respCliente = scan.nextLine();
+        for (Cliente umCliente : clienteLista) {
+            if (respCliente.equals(umCliente.getCpf())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("| NOME: %-50s|\n", umCliente.getNome());
+                System.out.printf("| TELEFONE: %-46s|\n", umCliente.getTelefone());
+                System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
+                System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
+                System.out.println("-----------------------------------------------------------\n");
+
+                nomeCliente = respCliente;
+            }
+        }
+
+        System.out.print("INFORME A SEGUIR O TITULO DO JOGO QUE DESEJA FAZER A DEVOLUCAO: ");
+        respJogo = scan.nextLine();
+        for (Jogo umJogo : jogoLista) {
+            if (respJogo.equalsIgnoreCase(umJogo.getTitulo())) {
+                System.out.println("-----------------------------------------------------------");
+                System.out.printf("| ID DO JOGO: %-44s|\n", umJogo.getId());
+                System.out.printf("| DESENVOLVEDOR: %-41s|\n", umJogo.getDesenvolvedor());
+                System.out.printf("| GENERO: %-48s|\n", umJogo.getGenero());
+                System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umJogo.getClassificacao());
+                System.out.printf("| PLATAFORMA: %-44s|\n", umJogo.getPlataforma());
+                System.out.printf("| UNIDADES DISPONIVEIS APOS O ALUGUEL: %-19s|\n", (umJogo.getQuantidade() + mais));
+                umJogo.setQuantidade(umJogo.getQuantidade() + mais);
+                System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umJogo.getValor());
+                System.out.println("-----------------------------------------------------------\n");
+
+                for (Cliente umCliente : clienteLista) {
+                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umJogo)) {
+                        AluguelLista.remove(umJogo.getTitulo());
+                        AluguelClienteLista.remove(umCliente.getNome());
+                    }
+                }
+            }
+        }
+    }
+
+
+
     //Criando um método para checar quais objetos foram alugados, imprimindo o nome do cliente que fez o aluguel e o título do filme alugado
     public void pendencias() {
         System.out.println("\nVOCE SELECIONOU: [6] ALUGUEIS PENDENTES\n");
@@ -216,11 +478,12 @@ public class Menu {
             System.out.println("-----------------------------------------------------------");
             System.out.println("|CLIENTE:                                                 |");
             System.out.printf("|%-57s|\n", AluguelClienteLista.get(i));
-            System.out.println("|FILME(S) PENDENTE(S):                                    |");
-            System.out.printf("|%-57s|\n", AluguelFilmeLista.get(i));
+            System.out.println("|MIDIA(S) PENDENTE(S):                                    |");
+            System.out.printf("|%-57s|\n", AluguelLista.get(i));
             System.out.println("-----------------------------------------------------------\n");
         }
     }
+
     //Criando um método para imprimir uma mensagem de saída, quando o usuário escolher 7
     public void sair(){
         System.out.println("\nVOCE SELECIONOU: [7] SAIR\n");
