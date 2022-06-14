@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Menu {
 
-    //Declarando os ArrayLists que irão receber os Objetos da classe Cliente e Filme respectivamente
+    //Declarando os ArrayLists que irão receber os Objetos da classe Cliente, Filme e Jogo respectivamente
     ArrayList<Cliente> clienteLista = new ArrayList<>();
     ArrayList<Filme> filmeLista = new ArrayList<>();
     ArrayList<Jogo> jogoLista = new ArrayList<>();
@@ -50,6 +50,8 @@ public class Menu {
         Jogo.idJogoLista.add(1);
         Jogo.idJogoLista.add(2);
         Jogo.idJogoLista.add(3);
+
+        //Adicionando os nomes e títulos cadastrados acima no ArrayList que os recebe como String, para serem ordenados alfabeticamente futuramente
         Cliente.nomeClienteLista.add("Joao Lantyer");
         Cliente.nomeClienteLista.add("Renan Abreu");
         Cliente.nomeClienteLista.add("Joao Alfredo");
@@ -62,7 +64,7 @@ public class Menu {
         Jogo.tituloJogoLista.add("Half-Life 2");
         Jogo.tituloJogoLista.add("Metal Gear Solid");
 
-        //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 7(sair)
+        //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 10(sair)
         do{
             //Executando o método que irá imprimir o Menu
             exibirMenu();
@@ -73,7 +75,7 @@ public class Menu {
             //Atribuindo o valor da variável "escolha" ao que for digitado no teclado do usuário
             escolha = scan.nextInt();
 
-            //Criando uma estrutura de decisão "switch case" que terá a variável "escolha" como a variável de controle e selecionará uma das 8 opções dependendo do que o usuário digitou
+            //Criando uma estrutura de decisão "switch case" que terá a variável "escolha" como a variável de controle e selecionará uma das 11 opções dependendo do que o usuário digitou
             switch (escolha) {
                 //Caso o usuário tenha digitado 1, será executado o método realizarAluguel()
                 case 1: realizarAluguel();
@@ -95,18 +97,21 @@ public class Menu {
                 case 5: Filme.consultarFilme(filmeLista);
                 break;
 
+                //Caso o usuário tenha digitado 6, será executado o método da classe Jogo cadastrarJogo() e o retorno deste será adicionado ao ArrayList jogoLista
                 case 6: jogoLista.add(Jogo.cadastrarJogo());
 
+                //Caso o usuário tenha digitado 7, será executado o método da classe Jogo consultarJogo() no ArrayList jogoLista
                 case 7: Jogo.consultarJogo(jogoLista);
 
-                //Caso o usuário tenha digitado 6, será executado o método pendencias()
+                //Caso o usuário tenha digitado 8, será executado o método pendencias()
                 case 8: pendencias();
                 break;
 
+                //Caso o usuário tenha digitado 9,, será executado o método realizarDevolucao()
                 case 9: realizarDevolucao();
                 break;
 
-                //Caso o usuário tenha digitado 7, será executado o método sair()
+                //Caso o usuário tenha digitado 10, será executado o método sair()
                 case 10: sair();
                 break;
 
@@ -141,6 +146,7 @@ public class Menu {
     }
 
 
+    //Criando um método para exibir a escolha entre duas opções (Aluguel de Filme ou Jogo), e um "switch case" que irá executar uma das duas dependendo da escolha do usuário
     public void realizarAluguel() {
 
         Scanner scan = new Scanner(System.in);
@@ -180,7 +186,7 @@ public class Menu {
 
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR ALUGUEL DE UM FILME\n");
 
-        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
+        //Incrementando o id do aluguel, toda vez que o método realizarAluguelFilme for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
         id++;
         idAluguelLista.add(id);
         id = idAluguelLista.get(idAluguelLista.size() - 1);
@@ -224,7 +230,7 @@ public class Menu {
                         System.out.println("-----------------------------------------------------------\n");
 
                         /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
-                        ArrayList AluguelFilmeLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
+                        ArrayList AluguelLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
                         AluguelLista.add(umFilme.getTitulo());
 
                         for (Cliente umCliente : clienteLista) {
@@ -254,7 +260,7 @@ public class Menu {
 
     }
 
-    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
+    //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Jogo que será alugado,e guarde estes em suas respectivas ArrayLists
     public void realizarAluguelJogo() {
 
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
@@ -268,7 +274,7 @@ public class Menu {
 
         System.out.println("\nVOCE SELECIONOU: [2] REALIZAR ALUGUEL DE UM JOGO\n");
 
-        //Incrementando o id do aluguel, toda vez que o método realizarAluguel for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
+        //Incrementando o id do aluguel, toda vez que o método realizarAluguelJogo for chamado (Incrementamos o valor de id, o adicionamos ao ArrayList idAluguelLista e atribuímos este último valor a variável id)
         id++;
         idAluguelLista.add(id);
         id = idAluguelLista.get(idAluguelLista.size() - 1);
@@ -288,10 +294,10 @@ public class Menu {
             }
         }
 
-        //Criando uma estrutura de repetição "do while" para repetir esta porção do código, toda vez que o usuário escolher que quer fazer o aluguel de um filme adicional
+        //Criando uma estrutura de repetição "do while" para repetir esta porção do código, toda vez que o usuário escolher que quer fazer o aluguel de um jogo adicional
         do {
 
-            /*Atribuindo o título do Filme que será alugado numa variável, para que busque na lista filmeLista um Filme com o mesmo título,
+            /*Atribuindo o título do Jogo que será alugado numa variável, para que busque na lista jogoLista um Jogo com o mesmo título,
             e se achar, juntamente com o fato de ter mais de 0 unidades, irá imprimir o resto dos dados do mesmo */
             System.out.print("INFORME A SEGUIR O TITULO DO JOGO QUE DESEJA FAZER O ALUGUEL: ");
             respJogo = scan.nextLine();
@@ -309,8 +315,8 @@ public class Menu {
                         System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umJogo.getValor());
                         System.out.println("-----------------------------------------------------------\n");
 
-                        /*Adicionalmente, ao achar o Filme e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
-                        ArrayList AluguelFilmeLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
+                        /*Adicionalmente, ao achar o Jogo e o mesmo possui mais que 0 unidades disponíveis, o mesmo é adicionado ao
+                        ArrayList AluguelLista, assim como o nome do Cliente será adicionado no ArrayList AluguelClienteLista */
                         AluguelLista.add(umJogo.getTitulo());
 
                         for (Cliente umCliente : clienteLista) {
@@ -340,6 +346,7 @@ public class Menu {
 
     }
 
+    //Criando um método para exibir a escolha entre duas opções (Devolução de Filme ou Jogo), e um "switch case" que irá executar uma das duas dependendo da escolha do usuário
     public void realizarDevolucao() {
 
         Scanner scan = new Scanner(System.in);
@@ -365,10 +372,9 @@ public class Menu {
 
     }
 
+    //Criando um método para realizar a devolução de um filme, exibindo os detalhes do Cliente e do Filme, e assim removendo dos ArrayLists AluguelClienteLista e AluguelLista
     public void realizarDevolucaoFilme(){
 
-
-        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
         String respCliente, respFilme;
@@ -404,8 +410,10 @@ public class Menu {
                 System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umFilme.getValor());
                 System.out.println("-----------------------------------------------------------\n");
 
+                /*Criando um "for loop" que, para cada umCliente em clienteLista será feita a condição de se o CPF digitado for igual ao de algum Cliente no sistema,
+                e se o nome deste mesmo cliente em AluguelClienteLista estiver na mesma posição (index) do título do filme no ArrayList AluguelLista, ambos serão removidos*/
                 for (Cliente umCliente : clienteLista) {
-                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umFilme)) {
+                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente.getNome()) == AluguelLista.indexOf(umFilme.getTitulo())) {
                         AluguelLista.remove(umFilme.getTitulo());
                         AluguelClienteLista.remove(umCliente.getNome());
 
@@ -417,10 +425,9 @@ public class Menu {
         }
     }
 
+    //Criando um método para realizar a devolução de um filme, exibindo os detalhes do Cliente e do Filme, e assim removendo dos ArrayLists AluguelClienteLista e AluguelLista
     public void realizarDevolucaoJogo(){
 
-
-        //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
         String respCliente, respJogo;
@@ -456,8 +463,10 @@ public class Menu {
                 System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umJogo.getValor());
                 System.out.println("-----------------------------------------------------------\n");
 
+                /*Criando um "for loop" que, para cada umCliente em clienteLista será feita a condição de se o CPF digitado for igual ao de algum Cliente no sistema,
+                e se o nome deste mesmo cliente em AluguelClienteLista estiver na mesma posição (index) do título do jogo no ArrayList AluguelLista, ambos serão removidos*/
                 for (Cliente umCliente : clienteLista) {
-                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umJogo)) {
+                    if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente.getNome()) == AluguelLista.indexOf(umJogo.getTitulo())) {
                         AluguelLista.remove(umJogo.getTitulo());
                         AluguelClienteLista.remove(umCliente.getNome());
 

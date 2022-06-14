@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-//Criando a classe Filme
+//Criando a classe Filme, que herda os atributos e métodos da classe Midia
 public class Filme extends Midia{
 
     //Declarando os atributos
@@ -13,6 +13,8 @@ public class Filme extends Midia{
 
     //Criando um ArrayList idFilmeLista, que irá receber o id de cada Filme em Integer
     static ArrayList<Integer> idFilmeLista = new ArrayList<>();
+
+    //Criando um Arraylist que receberá única e exclusivamente os títulos dos filmes, para que sejam ordenados alfabeticamente futuramente
     static ArrayList<String> tituloFilmeLista = new ArrayList<>();
 
     //Gerando o construtor
@@ -126,11 +128,12 @@ public class Filme extends Midia{
                 listarFilme(listaFilme);
             break;
 
+            //Caso o usuário tenha digitado 2, será executado o método listarFilmeAlfabeticamente no ArrayList listaFilme
             case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS FILMES ALFABETICAMENTE\n");
                 listarFilmeAlfabeticamente(listaFilme);
             break;
 
-            //Caso o usuário tenha digitado 3, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
+            //Caso o usuário tenha digitado 3, será executado o método selecionarGeneroFilme(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
             case 3: System.out.println("\nVOCE SELECIONOU: [3] LISTAR FILMES POR GENERO\n");
                 escolhaSelecionarGenero = selecionarGeneroFilme();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -144,7 +147,7 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
+            //Caso o usuário tenha digitado 4, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
             case 4: System.out.println("\nVOCE SELECIONOU: [4] LISTAR FILMES POR CLASSIFICACAO INDICATIVA\n");
                 escolhaSelecionarClassificacao = selecionarClassificacao();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -175,18 +178,26 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
+            //Caso o usuário tenha digitado 6, será solicitado que ele digite o título do Filme que deseja atualizar, e então este valor será atribuído a variável escolhaTitulo
             case 6: System.out.println("\nVOCE SELECIONOU: [6] ATUALIZAR UM FILME\n");
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA ATUALIZAR: ");
                 escolhaTitulo = scan.nextLine();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+
+                //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
                 for(Filme umFilme : listaFilme) {
                     if (escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())){
                         System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
                         System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
+                        //Após isto, fazemos a atualização do cadastro, atribuindo o que o usuário digita em uma variável, que depois será atríbuida em cada atributo do objeto Filme, pelo método set
+                        System.out.println("\nATUALIZACAO DOS DADOS: ");
                         System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
                         String novoTitulo = scan.nextLine();
+
+                        /*Para ser alterado no ArrayList tituloFilmeLista também, fizemos um "for loop" que, para cada elemento (umTitulo) em tituloFilmeLista,
+                        será feita a condição de se o nome do Filme for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoTitulo */
                         for(String umTitulo: tituloFilmeLista) {
                             if (umFilme.getTitulo().equalsIgnoreCase(umTitulo)){
                                 tituloFilmeLista.set(tituloFilmeLista.indexOf(umTitulo), novoTitulo);
@@ -218,12 +229,15 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
+            //Caso o usuário tenha digitado 7, será solicitado que ele digite o titulo do Filme que deseja remover, e então este valor será atribuído a variável escolhaTitulo
             case 7: System.out.println("\nVOCE SELECIONOU: [7] REMOVER UM FILME DO SISTEMA\n");
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA REMOVER DO SISTEMA: ");
                 escolhaTitulo = scan.nextLine();
                 int posicao = 0;
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |                          TITULO                           |               DIRETOR               |  GENERO  | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
+
+                //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
                 for(Filme umFilme : listaFilme) {
                     if(escolhaTitulo.equalsIgnoreCase(umFilme.getTitulo())){
                         System.out.printf("|%-5d%-60s%-38s%-11s%-16s%-10s%-13d%-8.2f|\n", umFilme.getId(), umFilme.getTitulo(), umFilme.getDiretor(), umFilme.getGenero(), umFilme.getClassificacao(), umFilme.getDuracao(), umFilme.getQuantidade(), umFilme.getValor());
@@ -233,6 +247,8 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("GOSTARIA DE REMOVER ESTE FILME? [SIM/NAO]");
                 String opcao = scan.nextLine();
+
+                //Depois foi feita uma opção, de se o usuário digitar "SIM", o Filme na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList tituloFilmeLista
                 if(opcao.equalsIgnoreCase("SIM")){
                     listaFilme.remove(posicao);
                     tituloFilmeLista.remove(escolhaTitulo);
@@ -279,6 +295,7 @@ public class Filme extends Midia{
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
+    //Criando um método que ordene os valores do ArrayList tituloFilmeLista de forma alfabetica e depois, compare este mesmo String com o Titulo de algum filme, se for achado, será imprimido todos os seus dados
     public static void listarFilmeAlfabeticamente(ArrayList<Filme> listaFilme){
 
         Collections.sort(tituloFilmeLista);

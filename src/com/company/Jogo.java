@@ -4,21 +4,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+//Criando a classe Jogo, que herda os atributos e métodos da classe Midia
 public class Jogo extends Midia{
 
+    //Declarando os atributos
     private String plataforma, desenvolvedor;
-    static ArrayList<String> tituloJogoLista = new ArrayList<>();
+
+    //Criando um ArrayList idFilmeLista, que irá receber o id de cada Jogo em Integer
     static ArrayList<Integer> idJogoLista = new ArrayList<>();
 
+    //Criando um Arraylist que receberá única e exclusivamente os títulos dos jogos, para que sejam ordenados alfabeticamente futuramente
+    static ArrayList<String> tituloJogoLista = new ArrayList<>();
+
+    //Gerando o construtor
     public Jogo(int id, int quantidade, String titulo, String classificacao, String tipo, float valor, String genero, String desenvolvedor, String plataforma) {
         super(id, quantidade, titulo, classificacao, tipo, valor, genero);
         this.desenvolvedor = desenvolvedor;
         this.plataforma = plataforma;
     }
 
-    public String getPlataforma() {
-        return plataforma;
-    }
+    //Gerando os Getters e Setters
+    public String getPlataforma() { return plataforma; }
 
     public void setPlataforma(String plataforma) {
         this.plataforma = plataforma;
@@ -119,11 +125,12 @@ public class Jogo extends Midia{
                     listarJogo(listaJogo);
                     break;
 
+                //Caso o usuário tenha digitado 2, será executado o método listarJogoAlfabeticamente no ArrayList listaJogo
                 case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS JOGOS ALFABETICAMENTE\n");
                     listarJogoAlfabeticamente(listaJogo);
                 break;
 
-                //Caso o usuário tenha digitado 2, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
+                //Caso o usuário tenha digitado 3, será executado o método selecionarGeneroJogo(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
                 case 3: System.out.println("\nVOCE SELECIONOU: [3] LISTAR JOGOS POR GENERO\n");
                     escolhaSelecionarGenero = selecionarGeneroJogo();
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -152,12 +159,13 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
+                //Caso o usuário tenha digitado 5, será executado o método selecionarPlataforma(), e o valor retornado deste será atribuído a variável escolhaSelecionarPlataforma
                 case 5: System.out.println("\nVOCE SELECIONOU: [5] LISTAR JOGOS POR PLATAFORMA\n");
                     escolhaSelecionarPlataforma = selecionarPlataformaJogo();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |       PLATAFORMA       |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA | QUANTIDADE |  VALOR |");
 
-                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaJogo e imprime, para cada umJogo, todos os seus atributos CASO seu atributo classificacao seja o mesmo atribuído a variável escolhaSelecionarClassificacao
+                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaJogo e imprime, para cada umJogo, todos os seus atributos CASO seu atributo plataforma seja o mesmo atribuído a variável escolhaSelecionarPlataforma
                     for (Jogo umJogo : listaJogo) {
                         if (escolhaSelecionarPlataforma.equalsIgnoreCase(umJogo.getPlataforma())) {
                             System.out.printf("|%-5d%-25s%-60s%-38s%-29s%-16s%-13d%-8.2f|\n", umJogo.getId(), umJogo.getPlataforma(), umJogo.getTitulo(), umJogo.getDesenvolvedor(), umJogo.getGenero(), umJogo.getClassificacao(), umJogo.getQuantidade(), umJogo.getValor());
@@ -166,7 +174,7 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
-                //Caso o usuário tenha digitado 4, será solicitado que ele digite o título do Jogo que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
+                //Caso o usuário tenha digitado 6, será solicitado que ele digite o título do Jogo que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
                 case 6: System.out.println("\nVOCE SELECIONOU: [6] BUSCAR UM JOGO ESPECIFICO\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA BUSCAR: ");
                     escolhaTitulo = scan.nextLine();
@@ -181,19 +189,27 @@ public class Jogo extends Midia{
                     }
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
-
+                    
+                //Caso o usuário tenha digitado 7, será solicitado que ele digite o título do Jogo que deseja atualizar, e então este valor será atribuído a variável escolhaTitulo
                 case 7: System.out.println("\nVOCE SELECIONOU: [7] ATUALIZAR UM JOGO\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA ATUALIZAR: ");
                     escolhaTitulo = scan.nextLine();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
+
+                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaFilme e imprime, para cada umFilme, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
                     for(Jogo umJogo : listaJogo) {
                         if (escolhaTitulo.equalsIgnoreCase(umJogo.getTitulo())){
                             System.out.printf("|%-5d%-60s%-38s%-29s%-16s%-25s%-13d%-8.2f|\n", umJogo.getId(), umJogo.getTitulo(), umJogo.getDesenvolvedor(), umJogo.getGenero(), umJogo.getClassificacao(), umJogo.getPlataforma(), umJogo.getQuantidade(), umJogo.getValor());
                             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
+                            //Após isto, fazemos a atualização do cadastro, atribuindo o que o usuário digita em uma variável, que depois será atríbuida em cada atributo do objeto Jogo, pelo método set
+                            System.out.println("\nATUALIZACAO DOS DADOS: ");
                             System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
                             String novoTitulo = scan.nextLine();
+                            
+                            /*Para ser alterado no ArrayList tituloJogoLista também, fizemos um "for loop" que, para cada elemento (umTitulo) em tituloJogoLista,
+                            será feita a condição de se o nome do Jogo for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoTitulo */
                             for(String umTitulo: tituloJogoLista) {
                                 if (umJogo.getTitulo().equalsIgnoreCase(umTitulo)){
                                     tituloJogoLista.set(tituloJogoLista.indexOf(umTitulo), novoTitulo);
@@ -229,12 +245,15 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
+                //Caso o usuário tenha digitado 8, será solicitado que ele digite o titulo do Jogo que deseja remover, e então este valor será atribuído a variável escolhaTitulo
                 case 8: System.out.println("\nVOCE SELECIONOU: [8] REMOVER UM JOGO DO SISTEMA\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA REMOVER DO SISTEMA: ");
                     escolhaTitulo = scan.nextLine();
                     int posicao = 0;
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
+
+                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaJogo e imprime, para cada umJogo, todos os seus atributos CASO seu atributo titulo seja o mesmo atribuído a variável escolhaTitulo
                     for(Jogo umJogo : listaJogo) {
                         if(escolhaTitulo.equalsIgnoreCase(umJogo.getTitulo())){
                             System.out.printf("|%-5d%-60s%-38s%-29s%-16s%-25s%-13d%-8.2f|\n", umJogo.getId(), umJogo.getTitulo(), umJogo.getDesenvolvedor(), umJogo.getGenero(), umJogo.getClassificacao(), umJogo.getPlataforma(), umJogo.getQuantidade(), umJogo.getValor());
@@ -244,6 +263,8 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("GOSTARIA DE REMOVER ESTE JOGO? [SIM/NAO]");
                     String opcao = scan.nextLine();
+
+                    //Depois foi feita uma opção, de se o usuário digitar "SIM", o Jogo na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList tituloJogoLista
                     if(opcao.equalsIgnoreCase("SIM")){
                         listaJogo.remove(posicao);
                         tituloJogoLista.remove(escolhaTitulo);
@@ -259,7 +280,7 @@ public class Jogo extends Midia{
                     break;
 
 
-                //Caso o usuário digite 7, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+                //Caso o usuário digite 9, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
                 case 9: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
                     break;
 
@@ -290,6 +311,7 @@ public class Jogo extends Midia{
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
+    //Criando um método que ordene os valores do ArrayList tituloJogoLista de forma alfabetica e depois, compare este mesmo String com o Titulo de algum jogo, se for achado, será imprimido todos os seus dados
     public static void listarJogoAlfabeticamente(ArrayList<Jogo> listaJogo){
 
         Collections.sort(tituloJogoLista);
@@ -309,6 +331,8 @@ public class Jogo extends Midia{
     }
 
 
+    /*Criando um método que imprimirá um menu de escolha de gênero, e depois,a partir de uma estrutura de decisão "switch case",
+    o usuário será convidado a escolher um dos gêneros que foram imprimidos na tela, este gênero será o retorno, em String, do método.*/
     public static String selecionarGeneroJogo(){
 
         int escolhaGenero;
@@ -366,6 +390,8 @@ public class Jogo extends Midia{
         return generoEscolhido;
     }
 
+    /*Criando um método que imprimirá um menu de escolha de plataforma, e depois, a partir de uma estrutura de decisão "switch case",
+    o usuário será convidado a escolher uma das plataformas que foram imprimidas na tela, esta plataforma será o retorno, em String, do método.*/
     public static String selecionarPlataformaJogo(){
 
         int escolhaPlataforma;

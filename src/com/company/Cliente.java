@@ -10,6 +10,7 @@ public class Cliente {
     //Declarando os atributos
     private String nome, cpf, telefone, email, cep;
 
+    //Criando um Arraylist que receberá única e exclusivamente os nomes dos clientes, para que sejam ordenados alfabeticamente futuramente
     static ArrayList<String> nomeClienteLista = new ArrayList<>();
 
     //Gerando o construtor
@@ -109,7 +110,7 @@ public class Cliente {
         int escolhaConsultarCliente;
         String escolhaCpf, nomeCliente = "null";
 
-        //Criando uma estrutura de repetição "do while" para que o Sub-Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 3(sair)
+        //Criando uma estrutura de repetição "do while" para que o Sub-Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 6(sair)
         do {
 
             System.out.println("-----------------------------------------------------------");
@@ -137,6 +138,7 @@ public class Cliente {
                     listarCliente(listaCliente);
                 break;
 
+                //Caso o usuário tenha digitado 2, será executado o método listarClienteAlfabeticamente no ArrayList listaCliente
                 case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS CLIENTES ALFABETICAMENTE\n");
                     listarClienteAlfabeticamente(listaCliente);
                 break;
@@ -157,18 +159,26 @@ public class Cliente {
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
+                //Caso o usuário tenha digitado 4, será solicitado que ele digite o cpf do Cliente que deseja atualizar, e então este valor será atribuído a variável escolhaCpf
                 case 4: System.out.println("\nVOCE SELECIONOU: [4] ATUALIZAR UM CLIENTE\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA ATUALIZAR O CADASTRO: ");
                     escolhaCpf = scan.nextLine();
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
+
+                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaCliente e imprime, para cada umCliente, todos os seus atributos CASO seu atributo cpf seja o mesmo atribuído a variável escolhaCpf
                     for (Cliente umCliente : listaCliente) {
                         if (escolhaCpf.equalsIgnoreCase(umCliente.getCpf())) {
                             System.out.printf("|%-14s%-40s%-16s%-40s%-14s|\n", umCliente.getCpf(), umCliente.getNome(), umCliente.getTelefone(), umCliente.getEmail(), umCliente.getCep());
                             System.out.println("------------------------------------------------------------------------------------------------------------------------------");
+
+                            //Após isto, fazemos a atualização do cadastro, atribuindo o que o usuário digita em uma variável, que depois será atríbuida em cada atributo do objeto cliente, pelo método set
                             System.out.println("\nATUALIZACAO DOS DADOS: ");
                             System.out.print("INFORME A SEGUIR O PRIMEIRO E ULTIMO NOME DO CLIENTE (SEM CARACTERES ESPECIAIS): ");
                             String novoNome = scan.nextLine();
+
+                            /*Para ser alterado no ArrayList nomeClienteLista também, fizemos um "for loop" que, para cada elemento (umNome) em nomeClienteLista,
+                            será feita a condição de se o nome do Cliente for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoNome */
                             for(String umNome: nomeClienteLista) {
                                 if (umCliente.getNome().equalsIgnoreCase(umNome)){
                                     nomeClienteLista.set(nomeClienteLista.indexOf(umNome), novoNome);
@@ -195,12 +205,15 @@ public class Cliente {
                     }
                     break;
 
+                //Caso o usuário tenha digitado 5, será solicitado que ele digite o cpf do Cliente que deseja remover, e então este valor será atribuído a variável escolhaCpf
                 case 5: System.out.println("\nVOCE SELECIONOU: [5] REMOVER UM CLIENTE DO SISTEMA\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA REMOVER DO SISTEMA: ");
                     escolhaCpf = scan.nextLine();
                     int posicao = 0;
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
+
+                    //Então, foi criado um laço de repetição "for each", que percorre o ArrayList listaCliente e imprime, para cada umCliente, todos os seus atributos CASO seu atributo cpf seja o mesmo atribuído a variável escolhaCpf
                     for (Cliente umCliente : listaCliente) {
                         if (escolhaCpf.equalsIgnoreCase(umCliente.getCpf())) {
                             System.out.printf("|%-14s%-40s%-16s%-40s%-14s|\n", umCliente.getCpf(), umCliente.getNome(), umCliente.getTelefone(), umCliente.getEmail(), umCliente.getCep());
@@ -210,6 +223,7 @@ public class Cliente {
                         }
                     }
 
+                    //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList nomeClienteLista
                     System.out.println("GOSTARIA DE REMOVER ESTE CLIENTE? DIGITE 'SIM' OU 'NAO':");
                     String opcao = scan.nextLine();
                     if(opcao.equalsIgnoreCase("SIM")){
@@ -261,6 +275,7 @@ public class Cliente {
     }
 
 
+    //Criando um método que ordene os valores do ArrayList nomeClienteLista de forma alfabetica e depois, compare este mesmo String com o Nome de algum cliente, se for achado, será imprimido todos os seus dados
     public static void listarClienteAlfabeticamente(ArrayList<Cliente> listaCliente){
 
         Collections.sort(nomeClienteLista);
