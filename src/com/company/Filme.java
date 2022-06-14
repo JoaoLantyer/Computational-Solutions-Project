@@ -122,14 +122,17 @@ public class Filme extends Midia{
         switch(escolhaConsultarFilme) {
 
             //Caso o usuário tenha digitado 1, será executado o método listarFilme no ArrayList listaFilme
-            case 1: listarFilme(listaFilme);
+            case 1: System.out.println("\nVOCE SELECIONOU: [1] LISTAR TODOS OS FILMES\n");
+                listarFilme(listaFilme);
             break;
 
-            case 2: listarFilmeAlfabeticamente(listaFilme);
+            case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS FILMES ALFABETICAMENTE\n");
+                listarFilmeAlfabeticamente(listaFilme);
             break;
 
             //Caso o usuário tenha digitado 3, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
-            case 3: escolhaSelecionarGenero = selecionarGeneroFilme();
+            case 3: System.out.println("\nVOCE SELECIONOU: [3] LISTAR FILMES POR GENERO\n");
+                escolhaSelecionarGenero = selecionarGeneroFilme();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |           GENERO           |                          TITULO                           |               DIRETOR               | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
 
@@ -142,7 +145,8 @@ public class Filme extends Midia{
                 break;
 
             //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
-            case 4: escolhaSelecionarClassificacao = selecionarClassificacao();
+            case 4: System.out.println("\nVOCE SELECIONOU: [4] LISTAR FILMES POR CLASSIFICACAO INDICATIVA\n");
+                escolhaSelecionarClassificacao = selecionarClassificacao();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID | C. INDICATIVA |                          TITULO                           |               DIRETOR               |           GENERO           | DURACAO | QUANTIDADE |  VALOR |");
 
@@ -156,7 +160,8 @@ public class Filme extends Midia{
                 break;
 
             //Caso o usuário tenha digitado 5, será solicitado que ele digite o título do Filme que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
-            case 5: System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
+            case 5: System.out.println("\nVOCE SELECIONOU: [5] BUSCAR UM FILME ESPECIFICO\n");
+                System.out.print("DIGITE O TITULO DO FILME QUE DESEJA BUSCAR: ");
                 escolhaTitulo = scan.nextLine();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 System.out.println("| ID |                          TITULO                           |               DIRETOR               |           GENERO           | C. INDICATIVA | DURACAO | QUANTIDADE |  VALOR |");
@@ -170,7 +175,7 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            case 6:
+            case 6: System.out.println("\nVOCE SELECIONOU: [6] ATUALIZAR UM FILME\n");
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA ATUALIZAR: ");
                 escolhaTitulo = scan.nextLine();
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -213,7 +218,7 @@ public class Filme extends Midia{
                 System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 break;
 
-            case 7:
+            case 7: System.out.println("\nVOCE SELECIONOU: [7] REMOVER UM FILME DO SISTEMA\n");
                 System.out.print("DIGITE O TITULO DO FILME QUE DESEJA REMOVER DO SISTEMA: ");
                 escolhaTitulo = scan.nextLine();
                 int posicao = 0;
@@ -248,7 +253,7 @@ public class Filme extends Midia{
             break;
 
                 //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
-            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 5 PARA UTILIZAR O SUB-MENU CONSULTAR FILME!\n");
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 8 PARA UTILIZAR O SUB-MENU CONSULTAR FILME!\n");
         }
         }while(escolhaConsultarFilme != 8);
 
@@ -262,8 +267,6 @@ public class Filme extends Midia{
 
     //Criando um método que recebe um ArrayList de um objeto Filme, neste caso listaFilme
     public static void listarFilme(ArrayList<Filme> listaFilme){
-
-        System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR FILME\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaFilme, e imprima o seu resultado por meio do método imprimirFilme(), para cada umFilme.
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------");

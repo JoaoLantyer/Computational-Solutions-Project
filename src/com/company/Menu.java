@@ -154,7 +154,7 @@ public class Menu {
         System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------");
 
-        System.out.print("SUA ESCOLHA:");
+        System.out.print("SUA ESCOLHA: ");
         escolhaAluguel = scan.nextInt();
 
         switch(escolhaAluguel){
@@ -165,8 +165,6 @@ public class Menu {
         }
 
     }
-
-
 
     //Criando um método para exibir os detalhes do Cliente que realizará o Aluguel e o Filme que será alugado,e guarde estes em suas respectivas ArrayLists
     public void realizarAluguelFilme() {
@@ -326,7 +324,7 @@ public class Menu {
                 }
             }
 
-            System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
+            System.out.print("DESEJA ALUGAR OUTRO JOGO? DIGITE 'SIM' OU 'NAO': ");
             opcao = scan.nextLine();
 
         }while (opcao.equalsIgnoreCase("SIM"));
@@ -355,7 +353,7 @@ public class Menu {
         System.out.println("|                                                         |");
         System.out.println("-----------------------------------------------------------");
 
-        System.out.print("SUA ESCOLHA:");
+        System.out.print("SUA ESCOLHA: ");
         escolhaDevolucao = scan.nextInt();
 
         switch(escolhaDevolucao){
@@ -373,7 +371,7 @@ public class Menu {
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
-        String respCliente, respFilme, nomeCliente = "null", tituloFilme;
+        String respCliente, respFilme;
         int mais = 1;
 
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM FILME\n");
@@ -388,8 +386,6 @@ public class Menu {
                 System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
                 System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
                 System.out.println("-----------------------------------------------------------\n");
-
-                nomeCliente = respCliente;
             }
         }
 
@@ -403,7 +399,7 @@ public class Menu {
                 System.out.printf("| GENERO: %-48s|\n", umFilme.getGenero());
                 System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umFilme.getClassificacao());
                 System.out.printf("| DURACAO (EM MINUTOS): %-34s|\n", umFilme.getDuracao());
-                System.out.printf("| UNIDADES DISPONIVEIS APOS A DEVOLUCAO: %-19s|\n", (umFilme.getQuantidade() + mais));
+                System.out.printf("| UNIDADES DISPONIVEIS APOS A DEVOLUCAO: %-17s|\n", (umFilme.getQuantidade() + mais));
                 umFilme.setQuantidade(umFilme.getQuantidade() + mais);
                 System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umFilme.getValor());
                 System.out.println("-----------------------------------------------------------\n");
@@ -412,6 +408,9 @@ public class Menu {
                     if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umFilme)) {
                         AluguelLista.remove(umFilme.getTitulo());
                         AluguelClienteLista.remove(umCliente.getNome());
+
+                        System.out.println("DEVOLUCAO REALIZADA COM SUCESSO!\n");
+                        System.out.println("----------------------MUITO OBRIGADO!----------------------");
                     }
                 }
             }
@@ -424,7 +423,7 @@ public class Menu {
         //Criando o objeto Scanner que irá receber a entrada do teclado do usuário
         Scanner scan = new Scanner(System.in);
 
-        String respCliente, respJogo, nomeCliente = "null", tituloJogo;
+        String respCliente, respJogo;
         int mais = 1;
 
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM JOGO\n");
@@ -439,8 +438,6 @@ public class Menu {
                 System.out.printf("| E-MAIL: %-48s|\n", umCliente.getEmail());
                 System.out.printf("| CEP: %-51s|\n", umCliente.getCep());
                 System.out.println("-----------------------------------------------------------\n");
-
-                nomeCliente = respCliente;
             }
         }
 
@@ -454,7 +451,7 @@ public class Menu {
                 System.out.printf("| GENERO: %-48s|\n", umJogo.getGenero());
                 System.out.printf("| CLASSIFICACAO INDICATIVA: %-30s|\n", umJogo.getClassificacao());
                 System.out.printf("| PLATAFORMA: %-44s|\n", umJogo.getPlataforma());
-                System.out.printf("| UNIDADES DISPONIVEIS APOS O ALUGUEL: %-19s|\n", (umJogo.getQuantidade() + mais));
+                System.out.printf("| UNIDADES DISPONIVEIS APOS A DEVOLUCAO: %-17s|\n", (umJogo.getQuantidade() + mais));
                 umJogo.setQuantidade(umJogo.getQuantidade() + mais);
                 System.out.printf("| VALOR POR UNIDADE: R$%-35.2f|\n", umJogo.getValor());
                 System.out.println("-----------------------------------------------------------\n");
@@ -463,6 +460,9 @@ public class Menu {
                     if (respCliente.equals(umCliente.getCpf()) && AluguelClienteLista.indexOf(umCliente) == AluguelLista.indexOf(umJogo)) {
                         AluguelLista.remove(umJogo.getTitulo());
                         AluguelClienteLista.remove(umCliente.getNome());
+
+                        System.out.println("DEVOLUCAO REALIZADA COM SUCESSO!\n");
+                        System.out.println("----------------------MUITO OBRIGADO!----------------------\n");
                     }
                 }
             }
@@ -473,7 +473,7 @@ public class Menu {
 
     //Criando um método para checar quais objetos foram alugados, imprimindo o nome do cliente que fez o aluguel e o título do filme alugado
     public void pendencias() {
-        System.out.println("\nVOCE SELECIONOU: [6] ALUGUEIS PENDENTES\n");
+        System.out.println("\nVOCE SELECIONOU: [8] ALUGUEIS PENDENTES\n");
         for (int i = 0; i < AluguelClienteLista.size(); i++) {
             System.out.println("-----------------------------------------------------------");
             System.out.println("|CLIENTE:                                                 |");
@@ -484,13 +484,13 @@ public class Menu {
         }
     }
 
-    //Criando um método para imprimir uma mensagem de saída, quando o usuário escolher 7
+    //Criando um método para imprimir uma mensagem de saída, quando o usuário escolher 10
     public void sair(){
-        System.out.println("\nVOCE SELECIONOU: [7] SAIR\n");
+        System.out.println("\nVOCE SELECIONOU: [10] SAIR\n");
     }
 
-    //Criando um método que imprima uma mensagem "default", ou seja, irá aparecer quando o usuário digitar qualquer coisa que não seja de 1 a 7
+    //Criando um método que imprima uma mensagem "default", ou seja, irá aparecer quando o usuário digitar qualquer coisa que não seja de 1 a 10
     public void mensagemDefault(){
-        System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 7 PARA UTILIZAR O MENU!\n");
+        System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 10 PARA UTILIZAR O MENU!\n");
     }
 }

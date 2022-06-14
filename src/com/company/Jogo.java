@@ -96,17 +96,17 @@ public class Jogo extends Midia{
             System.out.println("|                                                         |");
             System.out.println("|   [1] LISTAR TODOS OS JOGOS                             |");
             System.out.println("|   [2] LISTAR TODOS OS JOGOS ALFABETICAMENTE             |");
-            System.out.println("|   [3] LISTAR JOGOS  POR GENERO                          |");
-            System.out.println("|   [4] LISTAR JOGOS  POR CLASSIFICACAO INDICATIVA        |");
-            System.out.println("|   [5] LISTAR JOGOS  POR PLATAFORMA                      |");
-            System.out.println("|   [6] BUSCAR UM JOGO  ESPECIFICO                        |");
+            System.out.println("|   [3] LISTAR JOGOS POR GENERO                           |");
+            System.out.println("|   [4] LISTAR JOGOS POR CLASSIFICACAO INDICATIVA         |");
+            System.out.println("|   [5] LISTAR JOGOS POR PLATAFORMA                       |");
+            System.out.println("|   [6] BUSCAR UM JOGO ESPECIFICO                         |");
             System.out.println("|   [7] ATUALIZAR UM JOGO                                 |");
             System.out.println("|   [8] REMOVER UM JOGO  DO SISTEMA                       |");
             System.out.println("|   [9] RETORNAR AO MENU PRINCIPAL                        |");
             System.out.println("|                                                         |");
             System.out.println("-----------------------------------------------------------");
 
-            System.out.print("DIGITE UM NUMERO ENTRE 1 E 7 PARA UTILIZAR O MENU: ");
+            System.out.print("DIGITE UM NUMERO ENTRE 1 E 9 PARA UTILIZAR O MENU: ");
             escolhaConsultarJogo = scan.nextInt();
 
             scan.nextLine();
@@ -115,14 +115,17 @@ public class Jogo extends Midia{
             switch(escolhaConsultarJogo) {
 
                 //Caso o usuário tenha digitado 1, será executado o método listarJogo no ArrayList listaJogo
-                case 1: listarJogo(listaJogo);
+                case 1: System.out.println("\nVOCE SELECIONOU: [1] LISTAR TODOS OS JOGOS\n");
+                    listarJogo(listaJogo);
                     break;
 
-                case 2: listarJogoAlfabeticamente(listaJogo);
+                case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS JOGOS ALFABETICAMENTE\n");
+                    listarJogoAlfabeticamente(listaJogo);
                 break;
 
                 //Caso o usuário tenha digitado 2, será executado o método selecionarGenero(), e o valor retornado deste será atribuído a variável escolhaSelecionarGenero
-                case 3: escolhaSelecionarGenero = selecionarGeneroJogo();
+                case 3: System.out.println("\nVOCE SELECIONOU: [3] LISTAR JOGOS POR GENERO\n");
+                    escolhaSelecionarGenero = selecionarGeneroJogo();
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |           GENERO           |                          TITULO                           |            DESENVOLVEDOR            |  C. INDICATIVA  |       PLATAFORMA       | QUANTIDADE |  VALOR |");
 
@@ -135,7 +138,8 @@ public class Jogo extends Midia{
                     break;
 
                 //Caso o usuário tenha digitado 3, será executado o método selecionarClassificacao(), e o valor retornado deste será atribuído a variável escolhaSelecionarClassificacao
-                case 4: escolhaSelecionarClassificacao = selecionarClassificacao();
+                case 4: System.out.println("\nVOCE SELECIONOU: [4] LISTAR JOGOS POR CLASSIFICACAO INDICATIVA\n");
+                    escolhaSelecionarClassificacao = selecionarClassificacao();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID | C. INDICATIVA |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           |       PLATAFORMA       | QUANTIDADE |  VALOR |");
 
@@ -148,7 +152,7 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
-                case 5:
+                case 5: System.out.println("\nVOCE SELECIONOU: [5] LISTAR JOGOS POR PLATAFORMA\n");
                     escolhaSelecionarPlataforma = selecionarPlataformaJogo();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |       PLATAFORMA       |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA | QUANTIDADE |  VALOR |");
@@ -163,7 +167,8 @@ public class Jogo extends Midia{
                     break;
 
                 //Caso o usuário tenha digitado 4, será solicitado que ele digite o título do Jogo que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
-                case 6: System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA BUSCAR: ");
+                case 6: System.out.println("\nVOCE SELECIONOU: [6] BUSCAR UM JOGO ESPECIFICO\n");
+                    System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA BUSCAR: ");
                     escolhaTitulo = scan.nextLine();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
@@ -177,7 +182,7 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
-                case 7:
+                case 7: System.out.println("\nVOCE SELECIONOU: [7] ATUALIZAR UM JOGO\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA ATUALIZAR: ");
                     escolhaTitulo = scan.nextLine();
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -224,7 +229,7 @@ public class Jogo extends Midia{
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
-                case 8:
+                case 8: System.out.println("\nVOCE SELECIONOU: [8] REMOVER UM JOGO DO SISTEMA\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA REMOVER DO SISTEMA: ");
                     escolhaTitulo = scan.nextLine();
                     int posicao = 0;
@@ -259,7 +264,7 @@ public class Jogo extends Midia{
                     break;
 
                 //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
-                default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 5 PARA UTILIZAR O SUB-MENU CONSULTAR JOGO!\n");
+                default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 9 PARA UTILIZAR O SUB-MENU CONSULTAR JOGO!\n");
             }
         }while(escolhaConsultarJogo != 9);
 
@@ -273,8 +278,6 @@ public class Jogo extends Midia{
 
     //Criando um método que recebe um ArrayList de um objeto Jogo, neste caso listaJogo
     public static void listarJogo(ArrayList<Jogo> listaJogo){
-
-        System.out.println("\nVOCE SELECIONOU: [5] CONSULTAR JOGO\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaJogo, e imprima o seu resultado por meio do método imprimirJogo(), para cada umJogo.
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------");

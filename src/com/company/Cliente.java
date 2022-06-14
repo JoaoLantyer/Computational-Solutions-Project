@@ -65,7 +65,7 @@ public class Cliente {
     //Criando um método para cadastrar o Cliente e que irá retornar um objeto Cliente
     public static Cliente cadastrarCliente(){
 
-        System.out.println("\nVOCÊ SELECIONOU: [2] CADASTRAR CLIENTE\n");
+        System.out.println("\nVOCE SELECIONOU: [2] CADASTRAR CLIENTE\n");
 
         Scanner scan = new Scanner(System.in);
 
@@ -133,14 +133,16 @@ public class Cliente {
             switch(escolhaConsultarCliente){
 
                 //Caso o usuário tenha digitado 1, será executado o método listarCliente no ArrayList listaCliente
-                case 1: listarCliente(listaCliente);
+                case 1: System.out.println("\nVOCE SELECIONOU: [1] LISTAR TODOS OS CLIENTES\n");
+                    listarCliente(listaCliente);
                 break;
 
-                case 2: listarClienteAlfabeticamente(listaCliente);
+                case 2: System.out.println("\nVOCE SELECIONOU: [2] LISTAR TODOS OS CLIENTES ALFABETICAMENTE\n");
+                    listarClienteAlfabeticamente(listaCliente);
                 break;
 
                 //Caso o usuário tenha digitado 3, será solicitado que ele digite o cpf do Cliente que deseja buscar, e então este valor será atribuído a variável escolhaCpf
-                case 3:
+                case 3: System.out.println("\nVOCE SELECIONOU: [3] BUSCAR UM CLIENTE ESPECIFICO\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA BUSCAR: ");
                     escolhaCpf = scan.nextLine();
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
@@ -155,7 +157,7 @@ public class Cliente {
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     break;
 
-                case 4:
+                case 4: System.out.println("\nVOCE SELECIONOU: [4] ATUALIZAR UM CLIENTE\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA ATUALIZAR O CADASTRO: ");
                     escolhaCpf = scan.nextLine();
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
@@ -193,7 +195,7 @@ public class Cliente {
                     }
                     break;
 
-                case 5:
+                case 5: System.out.println("\nVOCE SELECIONOU: [5] REMOVER UM CLIENTE DO SISTEMA\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA REMOVER DO SISTEMA: ");
                     escolhaCpf = scan.nextLine();
                     int posicao = 0;
@@ -230,7 +232,7 @@ public class Cliente {
                 break;
 
                 //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
-                default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 3 PARA UTILIZAR O SUB-MENU CONSULTAR CLIENTE!\n");
+                default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 6 PARA UTILIZAR O SUB-MENU CONSULTAR CLIENTE!\n");
 
             }
 
@@ -246,8 +248,6 @@ public class Cliente {
 
     //Criando um método que recebe um ArrayList de um objeto Cliente, neste caso listaCliente
     public static void listarCliente(ArrayList<Cliente> listaCliente){
-
-        System.out.println("\nVOCÊ SELECIONOU: [3] CONSULTAR CLIENTE\n");
 
         //Criando uma estrutura de repetição "for each", que percorre todo o ArrayList listaCliente, e imprima o seu resultado por meio do método imprimirCliente(), para cada umCliente.
 			 	System.out.println("------------------------------------------------------------------------------------------------");
