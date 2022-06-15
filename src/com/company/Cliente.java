@@ -186,9 +186,9 @@ public class Cliente {
                             String novoNome = scan.nextLine().toUpperCase(Locale.ROOT);
 
                             /*Para ser alterado no ArrayList nomeClienteLista também, fizemos um "for loop" que, para cada elemento (umNome) em nomeClienteLista,
-                            será feita a condição de se o nome do Cliente for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoNome */
+                            será feita a condição de se o nome do Cliente for o mesmo que algum elemento, e se o novoNome não estiver no ArrayList nomeClienteLista, será aplicado o método set com o novoNome */
                             for(String umNome: nomeClienteLista) {
-                                if (umCliente.getNome().equalsIgnoreCase(umNome)){
+                                if (umCliente.getNome().equalsIgnoreCase(umNome) && !nomeClienteLista.contains(novoNome)){
                                     nomeClienteLista.set(nomeClienteLista.indexOf(umNome), novoNome);
                                 }
                             }
@@ -227,13 +227,12 @@ public class Cliente {
                             System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                             nomeCliente = umCliente.getNome();
 
-                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList nomeClienteLista
+                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente que foi passado anteriormente, será removido
                             System.out.println("GOSTARIA DE REMOVER ESTE CLIENTE? DIGITE 'SIM' OU 'NAO':");
                             String opcao = scan.nextLine();
                             if(opcao.equalsIgnoreCase("SIM")){
 
                                 listaCliente.remove(umCliente);
-                                nomeClienteLista.remove(nomeCliente);
 
                                 System.out.println("\nCLIENTE REMOVIDO COM SUCESSO!");
                             }else if (opcao.equalsIgnoreCase("NAO")){
@@ -248,7 +247,7 @@ public class Cliente {
                     }
 
 
-                //Caso o usuário digite 6, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+                //Caso o usuário digite 6, será impressa uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
                 case 6: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
                 break;
 

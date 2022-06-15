@@ -225,9 +225,9 @@ public class Filme extends Midia{
                         String novoTitulo = scan.nextLine();
 
                         /*Para ser alterado no ArrayList tituloFilmeLista também, fizemos um "for loop" que, para cada elemento (umTitulo) em tituloFilmeLista,
-                        será feita a condição de se o nome do Filme for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoTitulo */
+                        será feita a condição de se o título do Filme for o mesmo que algum elemento, e se o novoTitulo não estiver no ArrayList tituloFilmeLista, será aplicado o método set com o novoTitulo */
                         for(String umTitulo: tituloFilmeLista) {
-                            if (umFilme.getTitulo().equalsIgnoreCase(umTitulo)){
+                            if (umFilme.getTitulo().equalsIgnoreCase(umTitulo) && !tituloFilmeLista.contains(novoTitulo)){
                                 tituloFilmeLista.set(tituloFilmeLista.indexOf(umTitulo), novoTitulo);
                             }
                         }
@@ -285,10 +285,10 @@ public class Filme extends Midia{
                         System.out.println("GOSTARIA DE REMOVER ESTE FILME? DIGITE 'SIM' OU 'NAO':");
                         String opcao = scan.nextLine();
 
-                        //Depois foi feita uma opção, de se o usuário digitar "SIM", o umFilme será removido, juntamente com o seu nome no ArrayList tituloFilmeLista
+                        //Depois foi feita uma opção, de se o usuário digitar "SIM", o umFilme será removido
                         if(opcao.equalsIgnoreCase("SIM")){
+
                             listaFilme.remove(umFilme);
-                            tituloFilmeLista.remove(escolhaTitulo);
 
                             System.out.println("\nFILME REMOVIDO COM SUCESSO!");
                         } else if (opcao.equalsIgnoreCase("NAO")) {
@@ -304,7 +304,7 @@ public class Filme extends Midia{
 
 
 
-            //Caso o usuário digite 8, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+            //Caso o usuário digite 8, será impressa uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
             case 8: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
             break;
 

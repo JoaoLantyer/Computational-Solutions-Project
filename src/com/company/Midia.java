@@ -80,7 +80,7 @@ public class Midia {
     }
 
     /*Criando um método que imprimirá um menu de escolha de classificação indicativa, e depois,a partir de uma estrutura de decisão "switch case",
-    o usuário será convidado a escolher uma das classificações que foram imprimidas na tela, esta classificação será o retorno, em String, do método.*/
+    o usuário será convidado a escolher uma das classificações que foram impressas na tela, esta classificação será o retorno, em String, do método.*/
     public static String selecionarClassificacao(){
 
         int escolhaClassificacao;

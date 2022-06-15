@@ -8,7 +8,7 @@ public class Menu {
 
     //Declarando os ArrayLists que irão receber os Objetos da classe Cliente, Filme e Jogo respectivamente
     ArrayList<Cliente> clienteLista = new ArrayList<>();
-    static ArrayList<Filme> filmeLista = new ArrayList<>();
+    ArrayList<Filme> filmeLista = new ArrayList<>();
     ArrayList<Jogo> jogoLista = new ArrayList<>();
 
     //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String

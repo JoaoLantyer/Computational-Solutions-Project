@@ -238,9 +238,9 @@ public class Jogo extends Midia{
                             String novoTitulo = scan.nextLine().toUpperCase(Locale.ROOT);
                             
                             /*Para ser alterado no ArrayList tituloJogoLista também, fizemos um "for loop" que, para cada elemento (umTitulo) em tituloJogoLista,
-                            será feita a condição de se o nome do Jogo for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoTitulo */
+                            será feita a condição de se o título do Jogo for o mesmo que algum elemento, e se o novoTitulo não estiver no ArrayList tituloJogoLista, será aplicado o método set com o novoTitulo */
                             for(String umTitulo: tituloJogoLista) {
-                                if (umJogo.getTitulo().equalsIgnoreCase(umTitulo)){
+                                if (umJogo.getTitulo().equalsIgnoreCase(umTitulo) && !tituloJogoLista.contains(novoTitulo)){
                                     tituloJogoLista.set(tituloJogoLista.indexOf(umTitulo), novoTitulo);
                                 }
                             }
@@ -303,10 +303,10 @@ public class Jogo extends Midia{
                             System.out.println("GOSTARIA DE REMOVER ESTE JOGO? DIGITE 'SIM' OU 'NAO':");
                             String opcao = scan.nextLine();
 
-                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o umJogo será removido, juntamente com o seu nome no ArrayList tituloJogoLista
+                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o umJogo será removido
                             if(opcao.equalsIgnoreCase("SIM")){
+
                                 listaJogo.remove(umJogo);
-                                tituloJogoLista.remove(escolhaTitulo);
 
                                 System.out.println("\nJOGO REMOVIDO COM SUCESSO!");
                             } else if (opcao.equalsIgnoreCase("NAO")) {
@@ -322,7 +322,7 @@ public class Jogo extends Midia{
 
 
 
-                //Caso o usuário digite 9, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
+                //Caso o usuário digite 9, será impressa uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
                 case 9: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
                     break;
 
@@ -437,7 +437,7 @@ public class Jogo extends Midia{
     }
 
     /*Criando um método que imprimirá um menu de escolha de plataforma, e depois, a partir de uma estrutura de decisão "switch case",
-    o usuário será convidado a escolher uma das plataformas que foram imprimidas na tela, esta plataforma será o retorno, em String, do método.*/
+    o usuário será convidado a escolher uma das plataformas que foram impressas na tela, esta plataforma será o retorno, em String, do método.*/
     public static String selecionarPlataformaJogo(){
 
         int escolhaPlataforma;
