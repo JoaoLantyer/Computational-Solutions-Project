@@ -275,6 +275,8 @@ public class Menu {
                         }
                         //Atribuindo e somando o valor do Filme alugado ao valorTotal, toda vez que essa operação é repetida, para recebermos o valor total da transação
                         valorTotal += umFilme.getValor();
+                    }else{
+                        System.out.println("\nFILME INDISPONIVEL NO MOMENTO, TENTE NOVAMENTE MAIS TARDE\n");
                     }
                 }
             }
@@ -383,6 +385,8 @@ public class Menu {
                         }
                         //Atribuindo e somando o valor do Filme alugado ao valorTotal, toda vez que essa operação é repetida, para recebermos o valor total da transação
                         valorTotal += umJogo.getValor();
+                    }else{
+                        System.out.println("\nJOGO INDISPONIVEL NO MOMENTO, TENTE NOVAMENTE MAIS TARDE\n");
                     }
                 }
             }
