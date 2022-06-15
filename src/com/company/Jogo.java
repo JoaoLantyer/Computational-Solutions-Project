@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 //Criando a classe Jogo, que herda os atributos e métodos da classe Midia
 public class Jogo extends Midia{
@@ -58,8 +56,10 @@ public class Jogo extends Midia{
         idJogoLista.add(id);
         id = idJogoLista.get(idJogoLista.size() - 1);
 
+        try {
+
         System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
-        titulo = scan.nextLine();
+        titulo = scan.nextLine().toUpperCase(Locale.ROOT);
 
         System.out.print("INFORME O DESENVOLVEDOR (SEM CARACTERES ESPECIAIS): ");
         desenvolvedor = scan.nextLine();
@@ -76,10 +76,18 @@ public class Jogo extends Midia{
         System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
         valor = scan.nextFloat();
 
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            System.out.println("O PROGRAMA RETORNARA PARA O INICIO DO CADASTRO!");
+            return cadastrarJogo();
+        }
+
         //Instanciando um Objeto Jogo na variável jogo, com os atributos escolhidos acima
         jogo = new Jogo(id, quantidade, titulo, classificacao, tipo, valor, genero, desenvolvedor, plataforma);
 
-        tituloJogoLista.add(titulo);
+        if(!tituloJogoLista.contains(titulo)) {
+            tituloJogoLista.add(titulo);
+        }
 
         //Retornando a variável jogo que o objeto Jogo foi instanciado
         return jogo;
@@ -113,8 +121,14 @@ public class Jogo extends Midia{
             System.out.println("-----------------------------------------------------------");
 
             System.out.print("DIGITE UM NUMERO ENTRE 1 E 9 PARA UTILIZAR O MENU: ");
-            escolhaConsultarJogo = scan.nextInt();
 
+            try{
+            escolhaConsultarJogo = scan.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                consultarJogo(listaJogo);
+                return;
+            }
             scan.nextLine();
 
             //Criando uma estrutura de decisão "switch case" que terá a variável "escolhaConsultarJogo" como a variável de controle e selecionará uma das 6 opções dependendo do que o usuário digitou
@@ -177,7 +191,13 @@ public class Jogo extends Midia{
                 //Caso o usuário tenha digitado 6, será solicitado que ele digite o título do Jogo que deseja buscar, e então este valor será atribuído a variável escolhaTitulo
                 case 6: System.out.println("\nVOCE SELECIONOU: [6] BUSCAR UM JOGO ESPECIFICO\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA BUSCAR: ");
+                    try{
                     escolhaTitulo = scan.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarJogo(listaJogo);
+                        return;
+                    }
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
 
@@ -193,7 +213,14 @@ public class Jogo extends Midia{
                 //Caso o usuário tenha digitado 7, será solicitado que ele digite o título do Jogo que deseja atualizar, e então este valor será atribuído a variável escolhaTitulo
                 case 7: System.out.println("\nVOCE SELECIONOU: [7] ATUALIZAR UM JOGO\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA ATUALIZAR: ");
+
+                    try{
                     escolhaTitulo = scan.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarJogo(listaJogo);
+                        return;
+                    }
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
 
@@ -205,8 +232,10 @@ public class Jogo extends Midia{
 
                             //Após isto, fazemos a atualização do cadastro, atribuindo o que o usuário digita em uma variável, que depois será atríbuida em cada atributo do objeto Jogo, pelo método set
                             System.out.println("\nATUALIZACAO DOS DADOS: ");
+
+                            try{
                             System.out.print("INFORME O TITULO (SEM CARACTERES ESPECIAIS): ");
-                            String novoTitulo = scan.nextLine();
+                            String novoTitulo = scan.nextLine().toUpperCase(Locale.ROOT);
                             
                             /*Para ser alterado no ArrayList tituloJogoLista também, fizemos um "for loop" que, para cada elemento (umTitulo) em tituloJogoLista,
                             será feita a condição de se o nome do Jogo for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoTitulo */
@@ -236,6 +265,14 @@ public class Jogo extends Midia{
                             System.out.print("INFORME O VALOR DO ALUGUEL POR UNIDADE: ");
                             float novoValor = scan.nextFloat();
                             umJogo.setValor(novoValor);
+
+                            } catch (InputMismatchException e){
+                                System.out.println("ERRO! VALOR INVALIDO!");
+                                System.out.println("ATUALIZACAO INTERROMPIDA, TENTE NOVAMENTE");
+                                consultarJogo(listaJogo);
+                                return;
+                            }
+
                             System.out.println("\nREGISTRO ATUALIZADO: ");
                             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                             System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
@@ -248,8 +285,13 @@ public class Jogo extends Midia{
                 //Caso o usuário tenha digitado 8, será solicitado que ele digite o titulo do Jogo que deseja remover, e então este valor será atribuído a variável escolhaTitulo
                 case 8: System.out.println("\nVOCE SELECIONOU: [8] REMOVER UM JOGO DO SISTEMA\n");
                     System.out.print("DIGITE O TITULO DO JOGO QUE DESEJA REMOVER DO SISTEMA: ");
+                    try{
                     escolhaTitulo = scan.nextLine();
-                    int posicao = 0;
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarJogo(listaJogo);
+                        return;
+                    }
                     System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("| ID |                          TITULO                           |            DESENVOLVEDOR            |           GENERO           | C. INDICATIVA |       PLATAFORMA       | QUANTIDADE |  VALOR |");
 
@@ -257,34 +299,34 @@ public class Jogo extends Midia{
                     for(Jogo umJogo : listaJogo) {
                         if(escolhaTitulo.equalsIgnoreCase(umJogo.getTitulo())){
                             System.out.printf("|%-5d%-60s%-38s%-29s%-16s%-25s%-13d%-8.2f|\n", umJogo.getId(), umJogo.getTitulo(), umJogo.getDesenvolvedor(), umJogo.getGenero(), umJogo.getClassificacao(), umJogo.getPlataforma(), umJogo.getQuantidade(), umJogo.getValor());
-                            posicao = listaJogo.indexOf(umJogo);
+                            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                            System.out.println("GOSTARIA DE REMOVER ESTE JOGO? DIGITE 'SIM' OU 'NAO':");
+                            String opcao = scan.nextLine();
+
+                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o umJogo será removido, juntamente com o seu nome no ArrayList tituloJogoLista
+                            if(opcao.equalsIgnoreCase("SIM")){
+                                listaJogo.remove(umJogo);
+                                tituloJogoLista.remove(escolhaTitulo);
+
+                                System.out.println("\nJOGO REMOVIDO COM SUCESSO!");
+                            } else if (opcao.equalsIgnoreCase("NAO")) {
+                                System.out.println("O JOGO NAO FOI REMOVIDO DO SISTEMA...");
+                                System.out.println("VOLTANDO PARA O SUB-MENU...");
+                            }else{
+                                System.out.println("OPCAO INVALIDA! ");
+                                System.out.println("VOLTANDO PARA O SUB-MENU...");
+                            }
+                            break;
                         }
                     }
-                    System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                    System.out.println("GOSTARIA DE REMOVER ESTE JOGO? [SIM/NAO]");
-                    String opcao = scan.nextLine();
 
-                    //Depois foi feita uma opção, de se o usuário digitar "SIM", o Jogo na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList tituloJogoLista
-                    if(opcao.equalsIgnoreCase("SIM")){
-                        listaJogo.remove(posicao);
-                        tituloJogoLista.remove(escolhaTitulo);
-
-                        System.out.println("\nJOGO REMOVIDO COM SUCESSO!");
-                    } else if (opcao.equalsIgnoreCase("NAO")) {
-                        System.out.println("O JOGO NAO FOI REMOVIDO DO SISTEMA...");
-                        System.out.println("VOLTANDO PARA O SUB-MENU...");
-                    }else{
-                        System.out.println("OPCAO INVALIDA! ");
-                        System.out.println("VOLTANDO PARA O SUB-MENU...");
-                    }
-                    break;
 
 
                 //Caso o usuário digite 9, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
                 case 9: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
                     break;
 
-                //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
+                //Caso o usuário digite qualquer outro valor, será impressa uma mensagem de alerta
                 default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 9 PARA UTILIZAR O SUB-MENU CONSULTAR JOGO!\n");
             }
         }while(escolhaConsultarJogo != 9);
@@ -311,7 +353,7 @@ public class Jogo extends Midia{
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------\n");
     }
 
-    //Criando um método que ordene os valores do ArrayList tituloJogoLista de forma alfabetica e depois, compare este mesmo String com o Titulo de algum jogo, se for achado, será imprimido todos os seus dados
+    //Criando um método que ordene os valores do ArrayList tituloJogoLista de forma alfabetica e depois, compare este mesmo String com o Titulo de algum jogo, se for achado, será impresso todos os seus dados
     public static void listarJogoAlfabeticamente(ArrayList<Jogo> listaJogo){
 
         Collections.sort(tituloJogoLista);
@@ -332,7 +374,7 @@ public class Jogo extends Midia{
 
 
     /*Criando um método que imprimirá um menu de escolha de gênero, e depois,a partir de uma estrutura de decisão "switch case",
-    o usuário será convidado a escolher um dos gêneros que foram imprimidos na tela, este gênero será o retorno, em String, do método.*/
+    o usuário será convidado a escolher um dos gêneros que foram impressos na tela, este gênero será o retorno, em String, do método.*/
     public static String selecionarGeneroJogo(){
 
         int escolhaGenero;
@@ -350,8 +392,12 @@ public class Jogo extends Midia{
         System.out.println("|                                                                     |");
         System.out.println("-----------------------------------------------------------------------");
         System.out.print("SUA ESCOLHA: ");
+        try{
         escolhaGenero = scan.nextInt();
-
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            return selecionarGeneroJogo();
+        }
         switch (escolhaGenero){
             case 1: generoEscolhido = "Acao";
                 break;
@@ -383,8 +429,8 @@ public class Jogo extends Midia{
             case 10: generoEscolhido = "Outro";
                 break;
 
-            default: generoEscolhido = "Nao Escolhido";
-                System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 10 PARA SELECIONAR O GENERO!\n");
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 10 PARA SELECIONAR O GENERO!\n");
+            return selecionarGeneroJogo();
 
         }
         return generoEscolhido;
@@ -417,8 +463,12 @@ public class Jogo extends Midia{
         System.out.println("|                                                                            |");
         System.out.println("------------------------------------------------------------------------------");
         System.out.print("SUA ESCOLHA: ");
+        try{
         escolhaPlataforma = scan.nextInt();
-
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            return selecionarPlataformaJogo();
+        }
         switch (escolhaPlataforma){
             case 1: plataformaEscolhida = "Nintendo Switch";
                 break;
@@ -522,8 +572,9 @@ public class Jogo extends Midia{
             case 34: plataformaEscolhida = "NES";
                 break;
 
-            default: plataformaEscolhida = "Nao Escolhido";
-                System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 34 PARA SELECIONAR A PLATAFORMA!\n");
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 34 PARA SELECIONAR A PLATAFORMA!\n");
+            return selecionarPlataformaJogo();
+
 
         }
         return plataformaEscolhida;

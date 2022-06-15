@@ -7,6 +7,9 @@ public class Principal {
         //Criando um objeto menu da classe Menu
         Menu menu = new Menu();
 
+        //Rodando o método cadastroInicial() da classe Menu
+        menu.cadastroInicial();
+
         //Rodando o método executar() da classe Menu
         menu.executar();
 

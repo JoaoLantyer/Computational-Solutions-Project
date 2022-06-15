@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //Criando a classe Midia
@@ -10,6 +11,7 @@ public class Midia {
     protected String titulo, genero, classificacao, tipo;
     protected float valor;
 
+    //Gerando o construtor
     public Midia(int id, int quantidade, String titulo, String classificacao, String tipo, float valor, String genero) {
         this.id = id;
         this.quantidade = quantidade;
@@ -20,6 +22,7 @@ public class Midia {
         this.genero = genero;
     }
 
+    //Gerando os Getters e Setters
     public int getId() {
         return id;
     }
@@ -93,7 +96,14 @@ public class Midia {
         System.out.println("|                                                                     |");
         System.out.println("-----------------------------------------------------------------------");
         System.out.print("SUA ESCOLHA: ");
+
+        try{
         escolhaClassificacao = scan.nextInt();
+        } catch (
+    InputMismatchException e){
+        System.out.println("ERRO! VALOR INVALIDO!");
+        return selecionarClassificacao();
+        }
 
         switch (escolhaClassificacao){
             case 1: classificacaoEscolhida = "Livre";
@@ -114,8 +124,8 @@ public class Midia {
             case 6: classificacaoEscolhida = "18 anos";
                 break;
 
-            default: classificacaoEscolhida = "Nao Escolhido";
-                System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 6 PARA SELECIONAR A CLASSIFICACAO INDICATIVA!\n");
+            default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 6 PARA SELECIONAR A CLASSIFICACAO INDICATIVA!\n");
+            return selecionarClassificacao();
 
         }
         return classificacaoEscolhida;

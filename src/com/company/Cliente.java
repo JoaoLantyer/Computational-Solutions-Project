@@ -1,8 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 //Criando a classe Cliente
 public class Cliente {
@@ -75,8 +73,10 @@ public class Cliente {
         //Criando uma variável de referência do objeto Cliente
         Cliente cliente;
 
+        try{
+
         System.out.print("INFORME A SEGUIR O PRIMEIRO E ULTIMO NOME DO CLIENTE (SEM CARACTERES ESPECIAIS): ");
-        nome = scan.nextLine();
+        nome = scan.nextLine().toUpperCase(Locale.ROOT);
 
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE: ");
         cpf = scan.nextLine();
@@ -90,10 +90,18 @@ public class Cliente {
         System.out.print("INFORME A SEGUIR O CEP DO CLIENTE: ");
         cep = scan.nextLine();
 
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            System.out.println("O PROGRAMA RETORNARA PARA O INICIO DO CADASTRO!");
+            return cadastrarCliente();
+        }
+
         //Instanciando um Objeto Cliente na variável cliente, com os atributos escolhidos acima
         cliente = new Cliente(nome, cpf, telefone, email, cep);
 
-        nomeClienteLista.add(nome);
+        if(!nomeClienteLista.contains(nome)) {
+            nomeClienteLista.add(nome);
+        }
 
         System.out.println("\nCADASTRO CONCLUIDO!");
 
@@ -175,7 +183,7 @@ public class Cliente {
                             //Após isto, fazemos a atualização do cadastro, atribuindo o que o usuário digita em uma variável, que depois será atríbuida em cada atributo do objeto cliente, pelo método set
                             System.out.println("\nATUALIZACAO DOS DADOS: ");
                             System.out.print("INFORME A SEGUIR O PRIMEIRO E ULTIMO NOME DO CLIENTE (SEM CARACTERES ESPECIAIS): ");
-                            String novoNome = scan.nextLine();
+                            String novoNome = scan.nextLine().toUpperCase(Locale.ROOT);
 
                             /*Para ser alterado no ArrayList nomeClienteLista também, fizemos um "for loop" que, para cada elemento (umNome) em nomeClienteLista,
                             será feita a condição de se o nome do Cliente for o mesmo que algum elemento, o elemento nesta posição (index), será aplicado o método set com o novoNome */
@@ -209,7 +217,6 @@ public class Cliente {
                 case 5: System.out.println("\nVOCE SELECIONOU: [5] REMOVER UM CLIENTE DO SISTEMA\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA REMOVER DO SISTEMA: ");
                     escolhaCpf = scan.nextLine();
-                    int posicao = 0;
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
 
@@ -218,34 +225,34 @@ public class Cliente {
                         if (escolhaCpf.equalsIgnoreCase(umCliente.getCpf())) {
                             System.out.printf("|%-14s%-40s%-16s%-40s%-14s|\n", umCliente.getCpf(), umCliente.getNome(), umCliente.getTelefone(), umCliente.getEmail(), umCliente.getCep());
                             System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-                            posicao = listaCliente.indexOf(umCliente);
                             nomeCliente = umCliente.getNome();
+
+                            //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList nomeClienteLista
+                            System.out.println("GOSTARIA DE REMOVER ESTE CLIENTE? DIGITE 'SIM' OU 'NAO':");
+                            String opcao = scan.nextLine();
+                            if(opcao.equalsIgnoreCase("SIM")){
+
+                                listaCliente.remove(umCliente);
+                                nomeClienteLista.remove(nomeCliente);
+
+                                System.out.println("\nCLIENTE REMOVIDO COM SUCESSO!");
+                            }else if (opcao.equalsIgnoreCase("NAO")){
+                                System.out.println("O CLIENTE NAO FOI REMOVIDO DO SISTEMA...");
+                                System.out.println("VOLTANDO PARA O SUB-MENU...");
+                            }else{
+                                System.out.println("OPCAO INVALIDA! ");
+                                System.out.println("VOLTANDO PARA O SUB-MENU...");
+                            }
+                            break;
                         }
                     }
 
-                    //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente na posição (index) que foi passado anteriormente, será removido, juntamente com o seu nome no ArrayList nomeClienteLista
-                    System.out.println("GOSTARIA DE REMOVER ESTE CLIENTE? DIGITE 'SIM' OU 'NAO':");
-                    String opcao = scan.nextLine();
-                    if(opcao.equalsIgnoreCase("SIM")){
-
-                        listaCliente.remove(posicao);
-                        nomeClienteLista.remove(nomeCliente);
-
-                        System.out.println("\nCLIENTE REMOVIDO COM SUCESSO!");
-                    }else if (opcao.equalsIgnoreCase("NAO")){
-                        System.out.println("O CLIENTE NAO FOI REMOVIDO DO SISTEMA...");
-                        System.out.println("VOLTANDO PARA O SUB-MENU...");
-                    }else{
-                        System.out.println("OPCAO INVALIDA! ");
-                        System.out.println("VOLTANDO PARA O SUB-MENU...");
-                    }
-                    break;
 
                 //Caso o usuário digite 6, será imprimida uma mensagem de saída, e a estrutura de repetição "do while" será quebrada, retornando-o ao menu principal
                 case 6: System.out.println("\nRETORNANDO AO MENU PRINCIPAL...\n");
                 break;
 
-                //Caso o usuário digite qualquer outro valor, será imprimido uma mensagem de alerta
+                //Caso o usuário digite qualquer outro valor, será impressa uma mensagem de alerta
                 default: System.out.println("\n[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 6 PARA UTILIZAR O SUB-MENU CONSULTAR CLIENTE!\n");
 
             }
@@ -275,7 +282,7 @@ public class Cliente {
     }
 
 
-    //Criando um método que ordene os valores do ArrayList nomeClienteLista de forma alfabetica e depois, compare este mesmo String com o Nome de algum cliente, se for achado, será imprimido todos os seus dados
+    //Criando um método que ordene os valores do ArrayList nomeClienteLista de forma alfabetica e depois, compare este mesmo String com o Nome de algum cliente, se for achado, será impresso todos os seus dados
     public static void listarClienteAlfabeticamente(ArrayList<Cliente> listaCliente){
 
         Collections.sort(nomeClienteLista);

@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,13 +8,54 @@ public class Menu {
 
     //Declarando os ArrayLists que irão receber os Objetos da classe Cliente, Filme e Jogo respectivamente
     ArrayList<Cliente> clienteLista = new ArrayList<>();
-    ArrayList<Filme> filmeLista = new ArrayList<>();
+    static ArrayList<Filme> filmeLista = new ArrayList<>();
     ArrayList<Jogo> jogoLista = new ArrayList<>();
 
     //Declarando os ArrayLists que irão receber o ID de cada aluguel em Integer, o cpf do Cliente que fez o aluguel em String e o título do filme alugado em String
     ArrayList<Integer> idAluguelLista = new ArrayList<>();
     ArrayList<String> AluguelClienteLista = new ArrayList<>();
     ArrayList<String> AluguelLista = new ArrayList<>();
+
+    public void cadastroInicial(){
+        //Adicionando um valor inicial a idAluguelLista, a idFilmeLista e idJogoLista
+        idAluguelLista.add(0);
+        Filme.idFilmeLista.add(0);
+        Jogo.idJogoLista.add(0);
+
+        //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
+        clienteLista.add(new Cliente("JOAO LANTYER", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
+        clienteLista.add(new Cliente("RENAN ABREU", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
+        clienteLista.add(new Cliente("JOAO ALFREDO", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
+        clienteLista.add(new Cliente("ALDAIR LIMA", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
+        clienteLista.add(new Cliente("LEONI MASCARENHAS", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
+        filmeLista.add(new Filme(1, 5, "BATMAN: O CAVALEIRO DAS TREVAS", "12 anos", "Filme", 7.90f, 152, "Christopher Nolan", "Acao"));
+        filmeLista.add(new Filme(2, 5, "UM SONHO DE LIBERDADE", "16 anos", "Filme", 5.90f, 142, "Frank Darabont", "Drama"));
+        filmeLista.add(new Filme(3, 5, "O PODEROSO CHEFAO", "14 anos", "Filme", 6.50f, 175, "Francis Ford Coppola", "Crime"));
+        jogoLista.add(new Jogo(1, 5, "THE LEGEND OF ZELDA: OCARINA OF TIME", "12 anos", "Jogo", 5.50f, "Aventura", "Nintendo", "Nintendo 64"));
+        jogoLista.add(new Jogo(2, 5, "HALF-LIFE 2", "16 anos", "Jogo", 5.80f, "Acao", "Valve", "PC"));
+        jogoLista.add(new Jogo(3, 5, "METAL GEAR SOLID", "18 anos", "Jogo", 5.70f, "Acao", "Konami", "Playstation"));
+
+        //Adicionando 3 elementos no ArrayList idFilmeLista e no idJogoLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme ou jogo, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista/idJogoLista
+        Filme.idFilmeLista.add(1);
+        Filme.idFilmeLista.add(2);
+        Filme.idFilmeLista.add(3);
+        Jogo.idJogoLista.add(1);
+        Jogo.idJogoLista.add(2);
+        Jogo.idJogoLista.add(3);
+
+        //Adicionando os nomes e títulos cadastrados acima no ArrayList que os recebe como String, para serem ordenados alfabeticamente futuramente
+        Cliente.nomeClienteLista.add("JOAO LANTYER");
+        Cliente.nomeClienteLista.add("RENAN ABREU");
+        Cliente.nomeClienteLista.add("JOAO ALFREDO");
+        Cliente.nomeClienteLista.add("ALDAIR LIMA");
+        Cliente.nomeClienteLista.add("LEONI MASCARENHAS");
+        Filme.tituloFilmeLista.add("BATMAN: O CAVALEIRO DAS TREVAS");
+        Filme.tituloFilmeLista.add("UM SONHO DE LIBERDADE");
+        Filme.tituloFilmeLista.add("O PODEROSO CHEFAO");
+        Jogo.tituloJogoLista.add("THE LEGEND OF ZELDA: OCARINA OF TIME");
+        Jogo.tituloJogoLista.add("HALF-LIFE 2");
+        Jogo.tituloJogoLista.add("METAL GEAR SOLID");
+    }
 
     public void executar(){
 
@@ -25,45 +67,6 @@ public class Menu {
 
         System.out.println("\n---------------------INICIO DO PROGRAMA--------------------\n");
 
-        //Adicionando um valor inicial a idAluguelLista, a idFilmeLista e idJogoLista
-        idAluguelLista.add(0);
-        Filme.idFilmeLista.add(0);
-        Jogo.idJogoLista.add(0);
-
-        //Cadastro automático de 7 ou mais objetos, como foi instruído no edital
-        clienteLista.add(new Cliente("Joao Lantyer", "00000000000", "000000000", "joaolantyer@email.com", "00000-000"));
-        clienteLista.add(new Cliente("Renan Abreu", "11111111111", "111111111", "renanabreu@email.com", "11111-111"));
-        clienteLista.add(new Cliente("Joao Alfredo", "22222222222", "222222222", "joaoalfredo@email.com", "22222-222"));
-        clienteLista.add(new Cliente("Aldair Lima", "33333333333", "333333333", "aldairlima@email.com", "33333-333"));
-        clienteLista.add(new Cliente("Leoni Mascarenhas", "44444444444", "444444444", "leonimascarenhasu@email.com", "44444-444"));
-        filmeLista.add(new Filme(1, 5, "Batman: O Cavaleiro das Trevas", "12 anos", "Filme", 7.90f, 152, "Christopher Nolan", "Acao"));
-        filmeLista.add(new Filme(2, 5, "Um Sonho de Liberdade", "16 anos", "Filme", 5.90f, 142, "Frank Darabont", "Drama"));
-        filmeLista.add(new Filme(3, 5, "O Poderoso Chefao", "14 anos", "Filme", 6.50f, 175, "Francis Ford Coppola", "Crime"));
-        jogoLista.add(new Jogo(1, 5, "The Legend of Zelda: Ocarina of Time", "12 anos", "Jogo", 5.50f, "Aventura", "Nintendo", "Nintendo 64"));
-        jogoLista.add(new Jogo(2, 5, "Half-Life 2", "16 anos", "Jogo", 5.80f, "Acao", "Valve", "PC"));
-        jogoLista.add(new Jogo(3, 5, "Metal Gear Solid", "18 anos", "Jogo", 5.70f, "Acao", "Konami", "Playstation"));
-
-        //Adicionando 3 elementos no ArrayList idFilmeLista e no idJogoLista baseado no que foi feito acima, para que, ao ser cadastrado um novo filme ou jogo, o id ja comece do 4, já que ele incrementa em 1 e ele é atribuído do tamanho de idFilmeLista/idJogoLista
-        Filme.idFilmeLista.add(1);
-        Filme.idFilmeLista.add(2);
-        Filme.idFilmeLista.add(3);
-        Jogo.idJogoLista.add(1);
-        Jogo.idJogoLista.add(2);
-        Jogo.idJogoLista.add(3);
-
-        //Adicionando os nomes e títulos cadastrados acima no ArrayList que os recebe como String, para serem ordenados alfabeticamente futuramente
-        Cliente.nomeClienteLista.add("Joao Lantyer");
-        Cliente.nomeClienteLista.add("Renan Abreu");
-        Cliente.nomeClienteLista.add("Joao Alfredo");
-        Cliente.nomeClienteLista.add("Aldair Lima");
-        Cliente.nomeClienteLista.add("Leoni Mascarenhas");
-        Filme.tituloFilmeLista.add("Batman: O Cavaleiro das Trevas");
-        Filme.tituloFilmeLista.add("Um Sonho de Liberdade");
-        Filme.tituloFilmeLista.add("O Poderoso Chefao");
-        Jogo.tituloJogoLista.add("The Legend of Zelda: Ocarina of Time");
-        Jogo.tituloJogoLista.add("Half-Life 2");
-        Jogo.tituloJogoLista.add("Metal Gear Solid");
-
         //Criando uma estrutura de repetição "do while" para que o Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 10(sair)
         do{
             //Executando o método que irá imprimir o Menu
@@ -72,8 +75,15 @@ public class Menu {
             System.out.println("==================== ESCOLHA SUA OPCAO ====================");
             System.out.print("\nDIGITE UM NUMERO ENTRE 1 E 10 PARA UTILIZAR O MENU: ");
 
+            //Tratando os erros com um "try catch" para que, sempre que um erro de InputMismatchException aconteça, retorne ao método atual. Isto se repete por todo o código.
+            try{
             //Atribuindo o valor da variável "escolha" ao que for digitado no teclado do usuário
             escolha = scan.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                executar();
+                return;
+            }
 
             //Criando uma estrutura de decisão "switch case" que terá a variável "escolha" como a variável de controle e selecionará uma das 11 opções dependendo do que o usuário digitou
             switch (escolha) {
@@ -161,13 +171,23 @@ public class Menu {
         System.out.println("-----------------------------------------------------------");
 
         System.out.print("SUA ESCOLHA: ");
+
+        try{
         escolhaAluguel = scan.nextInt();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarAluguel();
+            return;
+        }
 
         switch(escolhaAluguel){
             case 1: realizarAluguelFilme();
             break;
 
             case 2: realizarAluguelJogo();
+            break;
+
+            default:System.out.println("[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 2 PARA UTILIZAR O MENU!");
         }
 
     }
@@ -194,7 +214,15 @@ public class Menu {
 
         //Atribuíndo o cpf do Cliente que irá fazer aluguel numa variável, para que se busque na lista clienteLista um Cliente com o mesmo cpf, e se achar, irá imprimir o resto dos seus dados
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
+
+        try{
         respCliente = scan.nextLine();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarAluguelFilme();
+            return;
+        }
+
         for (Cliente umCliente : clienteLista) {
             if (respCliente.equals(umCliente.getCpf())) {
                 System.out.println("-----------------------------------------------------------");
@@ -214,7 +242,14 @@ public class Menu {
             /*Atribuindo o título do Filme que será alugado numa variável, para que busque na lista filmeLista um Filme com o mesmo título,
             e se achar, juntamente com o fato de ter mais de 0 unidades, irá imprimir o resto dos dados do mesmo */
             System.out.print("INFORME A SEGUIR O TITULO DO FILME QUE DESEJA FAZER O ALUGUEL: ");
+
+            try{
             respFilme = scan.nextLine();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                realizarAluguelFilme();
+                return;
+            }
             for (Filme umFilme : filmeLista) {
                 if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
                     if(umFilme.getQuantidade() > 0) {
@@ -245,7 +280,13 @@ public class Menu {
             }
 
             System.out.print("DESEJA ALUGAR OUTRO FILME? DIGITE 'SIM' OU 'NAO': ");
+            try{
             opcao = scan.nextLine();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                realizarAluguelFilme();
+                return;
+            }
 
         }while (opcao.equalsIgnoreCase("SIM"));
 
@@ -282,7 +323,15 @@ public class Menu {
 
         //Atribuíndo o cpf do Cliente que irá fazer aluguel numa variável, para que se busque na lista clienteLista um Cliente com o mesmo cpf, e se achar, irá imprimir o resto dos seus dados
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER O ALUGUEL: ");
+
+        try{
         respCliente = scan.nextLine();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarAluguelJogo();
+            return;
+        }
+
         for (Cliente umCliente : clienteLista) {
             if (respCliente.equals(umCliente.getCpf())) {
                 System.out.println("-----------------------------------------------------------");
@@ -300,7 +349,15 @@ public class Menu {
             /*Atribuindo o título do Jogo que será alugado numa variável, para que busque na lista jogoLista um Jogo com o mesmo título,
             e se achar, juntamente com o fato de ter mais de 0 unidades, irá imprimir o resto dos dados do mesmo */
             System.out.print("INFORME A SEGUIR O TITULO DO JOGO QUE DESEJA FAZER O ALUGUEL: ");
+
+            try{
             respJogo = scan.nextLine();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                realizarAluguelJogo();
+                return;
+            }
+
             for (Jogo umJogo : jogoLista) {
                 if (respJogo.equalsIgnoreCase(umJogo.getTitulo())) {
                     if(umJogo.getQuantidade() > 0) {
@@ -331,7 +388,13 @@ public class Menu {
             }
 
             System.out.print("DESEJA ALUGAR OUTRO JOGO? DIGITE 'SIM' OU 'NAO': ");
+            try{
             opcao = scan.nextLine();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                realizarAluguelJogo();
+                return;
+            }
 
         }while (opcao.equalsIgnoreCase("SIM"));
 
@@ -361,13 +424,22 @@ public class Menu {
         System.out.println("-----------------------------------------------------------");
 
         System.out.print("SUA ESCOLHA: ");
-        escolhaDevolucao = scan.nextInt();
+        try{
+            escolhaDevolucao = scan.nextInt();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarDevolucao();
+            return;
+        }
 
         switch(escolhaDevolucao){
             case 1: realizarDevolucaoFilme();
                 break;
 
             case 2: realizarDevolucaoJogo();
+            break;
+
+            default: System.out.println("[ALERTA] VOCE DEVE SELECIONAR UM NUMERO ENTRE 1 E 2 PARA UTILIZAR O MENU!");
         }
 
     }
@@ -383,7 +455,14 @@ public class Menu {
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM FILME\n");
 
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER A DEVOLUCAO: ");
+        try{
         respCliente = scan.nextLine();
+    } catch (InputMismatchException e){
+        System.out.println("ERRO! VALOR INVALIDO!");
+        realizarDevolucaoFilme();
+        return;
+    }
+
         for (Cliente umCliente : clienteLista) {
             if (respCliente.equals(umCliente.getCpf())) {
                 System.out.println("-----------------------------------------------------------");
@@ -396,7 +475,13 @@ public class Menu {
         }
 
         System.out.print("INFORME A SEGUIR O TITULO DO FILME QUE DESEJA FAZER A DEVOLUCAO: ");
+        try{
         respFilme = scan.nextLine();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarDevolucaoFilme();
+            return;
+        }
         for (Filme umFilme : filmeLista) {
             if (respFilme.equalsIgnoreCase(umFilme.getTitulo())) {
                 System.out.println("-----------------------------------------------------------");
@@ -436,7 +521,13 @@ public class Menu {
         System.out.println("\nVOCE SELECIONOU: [1] REALIZAR DEVOLUCAO DE UM JOGO\n");
 
         System.out.print("INFORME A SEGUIR O CPF DO CLIENTE QUE DESEJA FAZER A DEVOLUCAO: ");
+        try{
         respCliente = scan.nextLine();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarDevolucaoJogo();
+            return;
+        }
         for (Cliente umCliente : clienteLista) {
             if (respCliente.equals(umCliente.getCpf())) {
                 System.out.println("-----------------------------------------------------------");
@@ -449,7 +540,13 @@ public class Menu {
         }
 
         System.out.print("INFORME A SEGUIR O TITULO DO JOGO QUE DESEJA FAZER A DEVOLUCAO: ");
+        try{
         respJogo = scan.nextLine();
+        } catch (InputMismatchException e){
+            System.out.println("ERRO! VALOR INVALIDO!");
+            realizarDevolucaoJogo();
+            return;
+        }
         for (Jogo umJogo : jogoLista) {
             if (respJogo.equalsIgnoreCase(umJogo.getTitulo())) {
                 System.out.println("-----------------------------------------------------------");
