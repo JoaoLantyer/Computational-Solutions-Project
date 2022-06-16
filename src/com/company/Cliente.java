@@ -116,7 +116,7 @@ public class Cliente {
         Scanner scan = new Scanner(System.in);
 
         int escolhaConsultarCliente;
-        String escolhaCpf, nomeCliente = "null";
+        String escolhaCpf;
 
         //Criando uma estrutura de repetição "do while" para que o Sub-Menu seja exibido e o usuário possa escolher uma das opções sempre que o número digitado for diferente de 6(sair)
         do {
@@ -134,7 +134,14 @@ public class Cliente {
             System.out.println("-----------------------------------------------------------");
 
             System.out.print("DIGITE UM NUMERO ENTRE 1 E 6 PARA UTILIZAR O MENU: ");
+
+            try{
             escolhaConsultarCliente = scan.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("ERRO! VALOR INVALIDO!");
+                consultarCliente(listaCliente);
+                return;
+            }
 
             scan.nextLine();
 
@@ -154,7 +161,13 @@ public class Cliente {
                 //Caso o usuário tenha digitado 3, será solicitado que ele digite o cpf do Cliente que deseja buscar, e então este valor será atribuído a variável escolhaCpf
                 case 3: System.out.println("\nVOCE SELECIONOU: [3] BUSCAR UM CLIENTE ESPECIFICO\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA BUSCAR: ");
+                    try{
                     escolhaCpf = scan.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarCliente(listaCliente);
+                        return;
+                    }
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
 
@@ -170,7 +183,13 @@ public class Cliente {
                 //Caso o usuário tenha digitado 4, será solicitado que ele digite o cpf do Cliente que deseja atualizar, e então este valor será atribuído a variável escolhaCpf
                 case 4: System.out.println("\nVOCE SELECIONOU: [4] ATUALIZAR UM CLIENTE\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA ATUALIZAR O CADASTRO: ");
+                    try{
                     escolhaCpf = scan.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarCliente(listaCliente);
+                        return;
+                    }
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
 
@@ -216,7 +235,13 @@ public class Cliente {
                 //Caso o usuário tenha digitado 5, será solicitado que ele digite o cpf do Cliente que deseja remover, e então este valor será atribuído a variável escolhaCpf
                 case 5: System.out.println("\nVOCE SELECIONOU: [5] REMOVER UM CLIENTE DO SISTEMA\n");
                     System.out.print("DIGITE O CPF DO CLIENTE QUE DESEJA REMOVER DO SISTEMA: ");
+                    try{
                     escolhaCpf = scan.nextLine();
+                    } catch (InputMismatchException e){
+                        System.out.println("ERRO! VALOR INVALIDO!");
+                        consultarCliente(listaCliente);
+                        return;
+                    }
                     System.out.println("------------------------------------------------------------------------------------------------------------------------------");
                     System.out.println("|     CPF     |                   NOME                |   TELEFONE    |                E-MAIL                 |     CEP      |");
 
@@ -225,7 +250,6 @@ public class Cliente {
                         if (escolhaCpf.equalsIgnoreCase(umCliente.getCpf())) {
                             System.out.printf("|%-14s%-40s%-16s%-40s%-14s|\n", umCliente.getCpf(), umCliente.getNome(), umCliente.getTelefone(), umCliente.getEmail(), umCliente.getCep());
                             System.out.println("------------------------------------------------------------------------------------------------------------------------------");
-                            nomeCliente = umCliente.getNome();
 
                             //Depois foi feita uma opção, de se o usuário digitar "SIM", o Cliente que foi passado anteriormente, será removido
                             System.out.println("GOSTARIA DE REMOVER ESTE CLIENTE? DIGITE 'SIM' OU 'NAO':");
